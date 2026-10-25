@@ -78,7 +78,7 @@ function content(b){const r=READS[b.id];
  <p class="why">↳ ${b.why}</p>${b.embed?`<div class="embed win"><div class="tb"><span>linkedin.com · Matt C.</span></div><div class="wb small"><p>“Dialled concept for a couple of reasons: 1. Co-signs are pretty scattered &amp; require baseline follower hygiene/knowing what to look for… 2. Question count introduces scarcity… 3. Second order effect, gives the folk at a16z the ability to see who’s got their talent spotting eye in/tastemaker sense.”</p><p class="muted">Reposting the a16z Cosign launch · Aug 2026</p></div></div>`:''}
  ${b.imgs&&b.imgs.length?`<div class="photos">${b.imgs.map(u=>`<figure class="pf"><img src="${u}" alt="${b.title}" loading="lazy"></figure>`).join("")}</div>${b.imgCap?`<p class="small muted">${b.imgCap}</p>`:''}`:''}
 
- ${b.art?`<p><a class="artl" href="article.html">Read my article, The co-sign ▸</a></p>`:''}${b.url?`<p><a href="${b.url}" ${b.url.startsWith("?")||!/^http/.test(b.url)?'':'target="_blank" rel="noopener"'}>${b.urlLab||"Open original ↗"}</a></p>`:''}
+ ${b.art?`<p><a class="artl" href="article.html">Read my article, Trust’s Biggest Accelerant ▸</a></p>`:''}${b.url?`<p><a href="${b.url}" ${b.url.startsWith("?")||!/^http/.test(b.url)?'':'target="_blank" rel="noopener"'}>${b.urlLab||"Open original ↗"}</a></p>`:''}
  ${strip?`<div class="conn"><div class="rl">Connected to · opens a new window</div><div class="strip">${strip}</div></div>`:''}
  ${b.when?`<p class="small muted">When: ${b.when}</p>`:""}`}
 function open(b,hop){if(!b)return;
