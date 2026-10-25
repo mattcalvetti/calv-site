@@ -203,3 +203,4 @@ a{color:#000}
 .ev{border-top:2px solid #000;margin-top:12px;padding-top:8px}.ev .rl{font-family:Silkscreen;font-size:12px;margin-bottom:6px}.ev a{display:block;margin:3px 0}
 .swin .photos:has(img[src*="sachin-email"]){display:block}.swin .pf:has(img[src*="sachin-email"]){width:100%;max-width:none}.swin img[src*="sachin-email"]{width:100%;height:auto;aspect-ratio:auto;object-fit:contain;border:1.5px solid #000}
 .swin img[src*="sachin-email"]{aspect-ratio:auto!important;object-fit:contain!important;height:auto!important;width:100%!important}
+#boot .voice{font-family:Silkscreen,Chicago,monospace;font-size:15px;line-height:1.5;max-width:30em;margin:18px auto 16px;border:2px solid #000;padding:10px 14px;background:#fff;box-shadow:3px 3px 0 #000}
