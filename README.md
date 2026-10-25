@@ -27,3 +27,11 @@ Cosign X posts are static cards (avatars in img/, pulled from public X profiles)
 Tapping the fingerprint triggers a real WebAuthn platform-authenticator prompt (Touch ID / Face ID / Windows Hello). First visit creates a passkey for this hostname and stores its credential id in localStorage; later visits ask for it. If passkeys are unavailable, cancelled, or error, an "Enter without passkey" link appears.
 
 **This is a local-device gate, not access control.** There is no backend, so nothing is verified server-side and anyone can bypass it. Restricting the site to approved emails requires a hosted auth service (e.g. Clerk, Supabase Auth, Auth0, or Cloudflare Access).
+
+## v9
+- New **Worked on** view (menu bar + Calv menu). `VIDEOS` and `WORK` in data.js. Video thumbnails are 1-bit placeholder frames.
+- **Titles dictated by voice, spellings to confirm:** "HIO RPO mission" (HIO? RPO?), "Pass Series A announcement" (dictated as "past series A"; is the company Pass?), "Behind the scenes of the Meridian launch" (Meridian?).
+- Beyond work is a Calv-menu window. Instagram removed everywhere.
+- Timeline newest first (`TL` built from `TL_OLDEST` reversed, plus `voicesite` Oct 2026 on top).
+- Cosigns: "Cosigned" H1, rounded 1987-dialog cards, all avatars in original colour. Cosign breakdown moved into the "How cosigns work" card. Small cosign cards row removed (duplicated the embeds; Sachin "keep tabs on this guy" had no source and is deleted).
+- Tom: drop the real screenshot at `img/tom-whatsapp.png` and it replaces the text bubble automatically.

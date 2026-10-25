@@ -34,11 +34,14 @@ function unlock(){/* local gate only; see note above */if(unlocked)return;unlock
 
 // board
 const card=b=>{const el=document.createElement("div");el.className="win blk";el.id="b-"+b.id;
- el.innerHTML=`<div class="tb"><i class="cb"></i><span>${b.id}</span></div><div class="wb">${b.ph?'<span class="ph">PLACEHOLDER</span>':''}<h3>${b.title}</h3><div class="small">${b.body}</div><div class="why">↳ ${b.why}</div><div class="more">Tap for my read ▸</div></div>`;
+ el.innerHTML=`<div class="tb"><span>${b.id}</span></div><div class="wb">${b.ph?'<span class="ph">PLACEHOLDER</span>':''}<h3>${b.title}</h3><div class="small">${b.body}</div><div class="why">↳ ${b.why}</div><div class="more">Tap for my read ▸</div></div>`;
  el.onclick=()=>open(b);el.onmouseenter=()=>focus(b.id,1);el.onmouseleave=()=>focus(b.id,0);return el};
 function render(){const L=$("#colL"),R=$("#colR");
  BLOCKS.forEach(b=>{if(b.sec==="Things I'm interested in")L.append(card(b));else if(b.sec==="Things I've worked on")R.append(card(b));
-  else if(b.sec!=="Path")$("#gCos").append(card(b))});
+});
+ const frame=(t,sub)=>`<div class="frame"><svg viewBox="0 0 160 90" preserveAspectRatio="none"><rect width="160" height="90" fill="url(#dz)"/><polygon points="68,30 68,60 94,45" fill="#fff" stroke="#000" stroke-width="2"/></svg><span class="fl">${sub}</span></div>`;
+ $("#gVid").innerHTML='<svg width="0" height="0" style="position:absolute"><defs><pattern id="dz" width="4" height="4" patternUnits="userSpaceOnUse"><rect width="4" height="4" fill="#fff"/><rect width="1" height="1"/><rect x="2" y="2" width="1" height="1"/></pattern></defs></svg>'+VIDEOS.map(v=>`<div class="win wt${v.empty?' empty':''}"><div class="tb"><span>${v.k}</span></div><div class="wb">${v.empty?'<div class="frame blank"><span class="fl">more coming</span></div><h3>More coming</h3>':frame(v.t,"video coming")+`<h3>${v.t}</h3><div class="small">${v.d}</div>`}</div></div>`).join("");
+ WORK.map(T).forEach(b=>{const el=document.createElement("div");el.className="win wt blk";el.innerHTML=`<div class="tb"><span>${KIND(b)==="Path"?"Project":"Worked on"}</span></div><div class="wb"><h3>${b.title}</h3><div class="small">${b.body.replace(/<[^>]+>/g," ").slice(0,150)}${b.body.length>150?"…":""}</div><div class="more">Open ▸</div></div>`;el.onclick=()=>open(b);$("#gWork").append(el)});
  draw();window.onresize=draw;
  const tl=$("#timeline");TL.map(T).filter(Boolean).forEach(b=>{const r=document.createElement("div");r.className="tl";r.innerHTML=`<div class="yr">${b.when||""}</div><div class="ln"></div><div class="body"><b>${b.title}</b> <small>· ${b.sec}</small><div class="small">${b.why}</div></div>`;r.onclick=()=>open(b);tl.append(r)});}
 function draw(){const svg=$("#threads"),G=$("#cols").getBoundingClientRect();svg.innerHTML="";const NS="http://www.w3.org/2000/svg";
@@ -74,11 +77,12 @@ document.addEventListener("click",e=>{const d=e.target.dataset;
  if(d.hop){e.preventDefault();open(T(d.hop),1)}
  if(d.go){go(d.go);closeMenus()}
  if(d.act==="about"){show("#about");closeMenus()}
+ if(d.act==="beyond"){show("#beyond");closeMenus()}
  const mt=e.target.closest(".mt");if(mt){const m=mt.parentElement,was=m.classList.contains("open");closeMenus();if(!was)m.classList.add("open")}
  else if(!e.target.closest(".dd"))closeMenus()});
 const closeMenus=()=>document.querySelectorAll(".menu").forEach(m=>m.classList.remove("open"));
-const VIEWS=["board","timeline","signals"];
-function go(v){let drawer=null;if(v==="read")drawer="#dBeyond",v="board";if(v==="cos")drawer="#cosTop",v="board";if(v==="beyond")drawer="#dBeyond",v="board";
+const VIEWS=["board","work","timeline","signals"];document.addEventListener("keydown",e=>{if(e.key==="Escape")document.querySelectorAll(".modal").forEach(m=>m.hidden=true)});
+function go(v){let drawer=null;if(v==="read"||v==="beyond"){show("#beyond");return}if(v==="cos")drawer="#cosTop",v="board";if(v==="interested")drawer="#board",v="board";
  VIEWS.forEach(x=>$("#"+x).hidden=x!==v);$(".thesis").hidden=v!=="board";$("#cosTop").hidden=v!=="board";
  document.querySelectorAll(".vw").forEach(s=>s.classList.toggle("on",s.dataset.go===v));
  if(v==="board")draw();if(drawer)setTimeout(()=>{const d=$(drawer);if(d.tagName==="DETAILS")d.open=true;d.scrollIntoView({behavior:"smooth"})},30)}

@@ -87,10 +87,34 @@ a{color:#000}
 .pair{grid-template-columns:320px 1fr}.bubble{padding:12px 16px}.bubble p{font-size:20px}
 .xpost{border:2px solid #000;box-shadow:3px 3px 0 #000;padding:10px 12px;background:#fff}
 .xh{display:flex;gap:10px;align-items:center}.xh .xl{margin-left:auto;font-size:18px}
-.av{width:40px;height:40px;border:2px solid #000;filter:grayscale(1) contrast(1.4);image-rendering:pixelated;object-fit:cover}
+.av{width:40px;height:40px;border:2px solid #000;object-fit:cover}
 .xt{font-size:17px;margin:10px 0 6px}.xq{border-left:2px solid #000;padding-left:8px;margin:6px 0}.xd{display:block;margin-top:6px}
 
 .txtbtn{background:none;border:0;font:inherit;font-size:12px;text-decoration:underline;cursor:pointer;color:#000;margin-top:4px}
 #fmsg:empty{display:none}
 
 @media (prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
+
+/* v9 */
+.cosh{font-family:Silkscreen,monospace;font-weight:400;font-size:30px;margin:26px 0 0;letter-spacing:1px;background:#fff;display:inline-block;padding:0 10px;border:2px solid #000;box-shadow:3px 3px 0 #000}
+#cosTop .sec{display:block;width:max-content;margin-top:12px}
+/* 1987 alert-dialog shape: rounded rect with an inner double rule, same for every cosign */
+.cosrow .win{border-radius:12px;box-shadow:4px 4px 0 #000;outline:1px solid #000;outline-offset:-6px;overflow:hidden}
+.cosrow .win .tb{border-radius:10px 10px 0 0;margin:6px 6px 0}.cosrow .win .wb{padding:12px 18px 16px}
+.cosrow .xpost{border-radius:10px}.av{border-radius:50%}
+.wa{max-width:100%;border:2px solid #000;border-radius:10px;display:block}
+/* close box: plain square, shows an X on hover/focus, always on touch */
+.cb{display:grid;place-items:center}.cb:after{content:"";width:9px;height:9px;opacity:0;background:linear-gradient(45deg,transparent 42%,#000 42% 58%,transparent 58%),linear-gradient(-45deg,transparent 42%,#000 42% 58%,transparent 58%)}
+.cb:hover:after,.tb:hover .cb:after,.cb:focus:after{opacity:1}
+@media (hover:none){.cb:after{opacity:1}.cb{width:20px;height:20px;top:0}}
+.modal .tb{height:24px}.modal .cb{width:16px;height:16px;top:2px}
+.modal.wide{width:min(900px,96vw)}#gBeyond{grid-template-columns:repeat(2,1fr)}
+#work .lede{background:#fff;border:2px solid #000;padding:6px 10px;max-width:640px}
+.wgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px;margin-bottom:10px}
+.wt .wb{padding:0 0 12px}.wt h3,.wt .small,.wt .more{margin-left:12px;margin-right:12px}.wt h3{margin-top:10px;margin-bottom:4px;font-size:15px}
+.frame{position:relative;aspect-ratio:16/9;border-bottom:2px solid #000;overflow:hidden}.frame svg{width:100%;height:100%;display:block}
+.frame .fl{position:absolute;left:8px;bottom:6px;background:#000;color:#fff;font-family:Silkscreen;font-size:10px;padding:1px 6px}
+.frame.blank{background:#fff;border-bottom:2px dashed #000}.frame.blank .fl{background:#fff;color:#000;border:1px dashed #000}
+.wt.empty{border-style:dashed;box-shadow:none}.wt.empty h3{color:#555}
+@media(max-width:800px){#gBeyond{grid-template-columns:1fr}}
+.wa[hidden]{display:none}.cosrow{align-items:start}
