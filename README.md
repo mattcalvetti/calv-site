@@ -22,3 +22,8 @@ The card "why" lines, the board intro, the About text and the Bullish-on note we
 
 Still to confirm: 1000x podcast hosts (Avi Felman & Jonah Van Bourg), and whether Overheard can be described as serving Kindling's customers.
 Cosign X posts are static cards (avatars in img/, pulled from public X profiles) so they render identically everywhere; LinkedIn posts use LinkedIn's iframe with a text fallback.
+
+## Unlock gate (passkey)
+Tapping the fingerprint triggers a real WebAuthn platform-authenticator prompt (Touch ID / Face ID / Windows Hello). First visit creates a passkey for this hostname and stores its credential id in localStorage; later visits ask for it. If passkeys are unavailable, cancelled, or error, an "Enter without passkey" link appears.
+
+**This is a local-device gate, not access control.** There is no backend, so nothing is verified server-side and anyone can bypass it. Restricting the site to approved emails requires a hosted auth service (e.g. Clerk, Supabase Auth, Auth0, or Cloudflare Access).

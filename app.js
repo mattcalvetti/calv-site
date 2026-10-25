@@ -1,12 +1,36 @@
 const $=s=>document.querySelector(s);
 // boot
 const lines=["Kernel: specialised, not general.","Loading board… "+BLOCKS.length+" blocks","Allocating threads… ok","Inference path: one opinion","Awaiting authorised fingerprint_"];
-let i=0;const bl=$("#bootlog");const t=setInterval(()=>{bl.textContent+=lines[i++]+"\n";if(i>=lines.length)clearInterval(t)},280);
-let hold=0,ht;const f=$("#finger"),ring=$("#ring");
-const start=e=>{e.preventDefault();ht=setInterval(()=>{hold+=4;ring.style.clipPath=`inset(${100-hold}% 0 0 0)`;if(hold>=100){clearInterval(ht);unlock()}},30)};
-const stop=()=>{clearInterval(ht);if(hold<100){hold=0;ring.style.clipPath="inset(100% 0 0 0)"}};
-f.addEventListener("pointerdown",start);["pointerup","pointerleave"].forEach(ev=>f.addEventListener(ev,stop));
-function unlock(){/* TODO: replace with passkey (Clerk/Supabase) check against allowlisted emails */$("#boot").remove();$("#desk").hidden=false;render();}
+const bl=$("#bootlog"),RM=matchMedia("(prefers-reduced-motion: reduce)").matches;
+if(RM)bl.textContent=lines.join("\n")+"\n";else{let i=0;const t=setInterval(()=>{bl.textContent+=lines[i++]+"\n";if(i>=lines.length)clearInterval(t)},280);}
+// Unlock gate. NOTE: this is a LOCAL-DEVICE gate, NOT access control. There is no server,
+// so the WebAuthn assertion is never verified and anyone can bypass it ("Enter without passkey").
+// Real approved-email gating needs a hosted auth service (e.g. Clerk / Supabase / Auth0).
+const f=$("#finger"),ring=$("#ring"),nopk=$("#nopk"),fmsg=$("#fmsg"),KEY="calv-passkey-id";
+const rnd=n=>crypto.getRandomValues(new Uint8Array(n));
+const b64=u=>btoa(String.fromCharCode(...new Uint8Array(u))),unb64=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
+const fallback=m=>{fmsg.textContent=m||"";nopk.hidden=false};
+let busy=false;
+async function passkey(){
+ if(busy)return;busy=true;ring.style.clipPath="inset(0 0 0 0)";
+ try{
+  if(!window.PublicKeyCredential||!(await PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable()))return fallback("No Touch ID on this device.");
+  const id=localStorage.getItem(KEY);
+  if(id){
+   await navigator.credentials.get({publicKey:{challenge:rnd(32),rpId:location.hostname,userVerification:"required",timeout:60000,allowCredentials:[{type:"public-key",id:unb64(id)}]}});
+  }else{
+   const c=await navigator.credentials.create({publicKey:{challenge:rnd(32),rp:{name:"Calv",id:location.hostname},
+    user:{id:rnd(16),name:"visitor",displayName:"Visitor"},pubKeyCredParams:[{type:"public-key",alg:-7},{type:"public-key",alg:-257}],
+    authenticatorSelection:{authenticatorAttachment:"platform",userVerification:"required",residentKey:"preferred"},timeout:60000,attestation:"none"}});
+   localStorage.setItem(KEY,b64(c.rawId));
+  }
+  unlock();
+ }catch(e){fallback(e&&e.name==="NotAllowedError"?"Cancelled.":"Couldn't use a passkey.")}
+ finally{busy=false;ring.style.clipPath="inset(100% 0 0 0)"}
+}
+f.addEventListener("click",passkey);nopk.addEventListener("click",()=>unlock());
+let unlocked=false;
+function unlock(){/* local gate only; see note above */if(unlocked)return;unlocked=true;try{sessionStorage.setItem("calv-unlocked","1")}catch(e){}const bt=$("#boot");if(bt)bt.remove();$("#desk").hidden=false;render();}
 
 // board
 const card=b=>{const el=document.createElement("div");el.className="win blk";el.id="b-"+b.id;
@@ -66,5 +90,5 @@ document.querySelectorAll("iframe.li").forEach(f=>f.addEventListener("load",()=>
 setTimeout(()=>document.querySelectorAll("iframe.li").forEach(f=>{const fb=document.getElementById(f.dataset.fb);if(fb&&!fb.classList.contains("hid")){f.remove()}}),8000);
 // signals
 SIGNALS.forEach(s=>{const el=document.createElement("div");el.className="win blk";el.innerHTML=`<div class="tb"><span>${s.src}</span></div><div class="wb"><span class="ph">PLACEHOLDER</span><h3>${s.title.replace("[PLACEHOLDER] ","")}</h3><div class="small">${s.why}</div></div>`;$("#gSig").append(el)});
-if(location.hash.startsWith("#open"))unlock();
+if(location.hash.startsWith("#open")||sessionStorage.getItem("calv-unlocked"))unlock();
 const q=new URLSearchParams(location.search);if(q.get("about"))setTimeout(()=>show("#about"),80);if(q.get("v"))setTimeout(()=>go(q.get("v")),50);if(q.get("card"))setTimeout(()=>{q.get("card").split(",").forEach((c,i)=>open(T(c),i>0))},80);if(q.get("menu"))setTimeout(()=>$("#m"+q.get("menu")).classList.add("open"),80);

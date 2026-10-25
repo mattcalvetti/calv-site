@@ -1,13 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Silkscreen&family=VT323&display=swap');
 *{box-sizing:border-box}html,body{margin:0;height:100%}
 body{font:16px/1.35 "Chicago","ChicagoFLF","Geneva",ui-monospace,Menlo,monospace;color:#000;
-background-color:#fff;background-image:radial-gradient(#000 1px,transparent 1.2px);background-size:4px 4px}
+/* dither: crisp 4px SVG tile (was a sub-pixel radial-gradient that re-rasterised as grey/white shimmer on tab return) */
+background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' shape-rendering='crispEdges'%3E%3Crect width='1' height='1'/%3E%3C/svg%3E") 0 0/4px 4px repeat;image-rendering:pixelated}
 h1,h2,b,.tb span,#menubar{font-family:"Silkscreen","Chicago",monospace;font-weight:400}
 .screen{position:fixed;inset:0;display:grid;place-items:center;background:#888 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='2' height='2'%3E%3Crect width='1' height='1'/%3E%3Crect x='1' y='1' width='1' height='1'/%3E%3C/svg%3E")}
 .bootbox{background:#fff;border:2px solid #000;box-shadow:4px 4px 0 #000;padding:28px 36px;width:min(460px,92vw);text-align:center}
 .happy{font-size:48px}#bootlog{text-align:left;font-family:VT323,monospace;font-size:18px;min-height:130px;margin:8px 0}
-#finger{position:relative;display:inline-block;padding:10px;border:2px solid #000;border-radius:50%;cursor:pointer;user-select:none}
-#ring{position:absolute;inset:-6px;border-radius:50%;border:4px solid #000;clip-path:inset(100% 0 0 0);transition:clip-path .1s linear}
+#finger{background:#fff;font:inherit;position:relative;display:inline-block;padding:10px;border:2px solid #000;border-radius:50%;cursor:pointer;user-select:none}
+#ring{pointer-events:none;position:absolute;inset:-6px;border-radius:50%;border:4px solid #000;clip-path:inset(100% 0 0 0);transition:clip-path .1s linear}
 .small{font-size:13px}.muted{color:#555}
 #menubar{position:sticky;top:0;z-index:20;display:flex;gap:18px;align-items:center;background:#fff;border-bottom:2px solid #000;padding:3px 12px;font-size:14px}
 #menubar span{cursor:pointer;padding:0 6px}#menubar span.on,#menubar span:hover{background:#000;color:#fff}#menubar .right{margin-left:auto;font-family:VT323;font-size:18px}
@@ -88,3 +89,8 @@ a{color:#000}
 .xh{display:flex;gap:10px;align-items:center}.xh .xl{margin-left:auto;font-size:18px}
 .av{width:40px;height:40px;border:2px solid #000;filter:grayscale(1) contrast(1.4);image-rendering:pixelated;object-fit:cover}
 .xt{font-size:17px;margin:10px 0 6px}.xq{border-left:2px solid #000;padding-left:8px;margin:6px 0}.xd{display:block;margin-top:6px}
+
+.txtbtn{background:none;border:0;font:inherit;font-size:12px;text-decoration:underline;cursor:pointer;color:#000;margin-top:4px}
+#fmsg:empty{display:none}
+
+@media (prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
