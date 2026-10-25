@@ -28,6 +28,7 @@ const BLOCKS=[
 {id:"article",sec:"Things I've worked on",title:"Trust’s Biggest Accelerant (draft article)",body:"My essay on co-signs, from Jaz-O putting on a young Jay-Z to a16z's Cosign and X Money.",why:"I am writing up how I think cosigns work.",when:"2026",url:"article.html",urlLab:"Read the article ▸",links:["dylanx"]},
 {id:"distil",sec:"Things I've worked on",title:"Distillation into learnings",body:"How raw material gets distilled into top-line learnings the team can act on.",why:"It is the same habit as scouting, used on information.",when:"Kindling",links:["harness"]},
 {id:"fds",sec:"Things I've worked on",title:"FDS at Kindling",body:"Founding team at Kindling and head of FDS, leading a team of soon to be six strategists. FDS runs organic content for B2B tech founders.",why:"It is where taste has to become something a team can repeat.",when:"Since joining Kindling",links:["harness","distil","videos"]},
+{id:"platform",sec:"Things I've worked on",title:"The Kindling platform",body:"Kindling's marketing brain and execution system, about to launch at kindling.team. Over the last year I've helped steer the build for product, from the organic strategy it runs on through to briefs, ideas, copy and tone of voice.",why:"It is the system everything else I do at Kindling runs through.",when:"2025–2026",url:"https://kindling.team/product",urlLab:"Visit kindling.team ↗",links:["harness","distil","agentsw","fds","videos"]},
 {id:"videos",sec:"Things I've worked on",title:"Customer videos",body:"Videos I've run for Kindling customers through the Kindling marketplace, including HEO's first rendezvous mission, Haast's Series A and flagship agents, Haast's team film and building in public with Meridian.",url:"?v=work",urlLab:"Open the Worked on view ▸",why:"The work people actually see.",when:"Kindling",links:["sachadam"]},
 {id:"senescence",sec:"Things I've worked on",title:"Senescence",body:"An early short film of mine, named for the Latin word for the slow decline that comes with age.",why:"I was telling stories with a camera well before it was my job.",when:"",ph:1,pend:"Video link pending",links:["email"]},
 {id:"yala",sec:"Things I've worked on",title:"Yala Peak, Himalayas",body:"Yala Peak (5,600m) in the Himalayas, 11 days on foot, then time in Kathmandu, a city that felt soulful.",why:"I wanted some friction and came back with room to think.",when:"Apr 2025",imgs:["img/yala-1.jpg","img/yala-2.jpg","img/yala-3.jpg"],imgCap:"From my Instagram, April 2025",links:["friction","senescence"]},
@@ -49,7 +50,7 @@ const BLOCKS=[
 {id:"sachadam",sec:"Who's cosigned me",title:"Sachin & Adam",body:"An existing relationship around their documentary series on emerging tech.",why:"I am a sounding board to them alongside Tom.",when:"2026",ph:1,links:[]}
 ];
 // Threads: interest -> work it shaped. Order of both columns keeps these crossing-free.
-const THREADS=[["agentsi","email","agents in the pitch"],["friction","email","Yala, in the email"],["scout","agency","reading talent"],
+const THREADS=[["agentsi","platform","agents in the product"],["special","platform","built for one job"],["agentsi","email","agents in the pitch"],["friction","email","Yala, in the email"],["scout","agency","reading talent"],
 ["scout","itg","my first business"],["scout","email","backed Kindling early"],["scout","hyper","backing the founder"],
 ["conviction","hyper","a conviction bet"],["conviction","cospost","who has the eye"],
 ["cosign","cospost","the mechanic, early"],["cosign","article","the essay's subject"],
@@ -126,7 +127,7 @@ const BEYOND=[
  {t:"Sound healing"},{t:"Going from digital back to analog",a:"agency over what we consume"},{t:"Online identity"},{t:"Jazz"},{t:"Wine"},{t:"Community, and things going local"},{t:"Hardware"},{t:"Financial markets"}]}
 ];
 // Timeline order (oldest → newest). Entries with no "when" render without a date label.
-const TL_OLDEST=["senescence","signing","london","itg","moon","web3","degods","frank","yala","agency","email","kindling","fds","fdssig","distil","harness","hyper","agentsw","videos","sachpost","cospost","dylanx","dylan","brent","sachadam","erik","article"];
+const TL_OLDEST=["senescence","signing","london","itg","moon","web3","degods","frank","yala","agency","email","kindling","fds","fdssig","distil","harness","hyper","agentsw","platform","videos","sachpost","cospost","dylanx","dylan","brent","sachadam","erik","article"];
 // Timeline renders newest first.
 const TL=["voicesite",...TL_OLDEST.slice().reverse()];
 // v13: Customer videos, only work Calv made. li = LinkedIn embed URN (plays in situ), u = clean post URL, src = self-hosted mp4.
@@ -145,3 +146,16 @@ const INPROG=[
 const WORK=BLOCKS.filter(b=>b.sec==="Things I've worked on"&&b.id!=="videos").map(b=>b.id);
 // v12: lens -> Interested-in card it belongs to (only where one exists)
 const LENS_CARD={"Talent scouting":"scout","New media":"brent"};
+
+// v22: Worked on spotlight for the Kindling platform. Only claims the public site or existing cards support.
+const PLATFORM={img:"img/kindling-product.jpg?v=22",u:"https://kindling.team/product",
+ line:"Kindling is the marketing brain and execution system we're about to launch. Over the last year I've helped steer the build for product.",
+ flow:[
+ ["Strategy","An opinionated view of what organic marketing for a B2B tech company should look like."],
+ ["Partners","How we vet and bid preferred partners on the marketplace, and how those relationships are set up."],
+ ["Briefs","Briefs written automatically in platform from what Kindling knows about the company."],
+ ["Distillation","Raw company knowledge distilled into the few lines that matter."],
+ ["Ideas","Those learnings turned into ideas worth pursuing."],
+ ["Harness","Ideas run through the harness of chained skills our strategists use."],
+ ["Copy","Copywriting that comes out of the same flow."],
+ ["Tone of voice","Ongoing work to make the copy sound more like each founder."]]};
