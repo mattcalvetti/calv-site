@@ -239,3 +239,26 @@ a{color:#000}
 .satile .frame .play svg{width:44px!important;height:44px!important}
 .wgrid.saf{grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px}
 .saf .satile h3,.wgrid.saf h3{font-size:15px}
+/* v27 */
+#about .belief{font-size:16px;line-height:1.55;margin:0 0 6px}
+#about h2{margin:14px 0 6px}
+.spotw .vp .play{inset:auto auto 14px 14px;display:block}
+.spotw .frame .play svg{width:40px!important;height:40px!important}
+.spotw .vp .fl{display:none}
+#gProg{padding-bottom:48px}
+.prog .phead{display:flex;justify-content:space-between;align-items:center;margin:0 0 10px;min-height:22px}
+.prog .plogo{height:20px;width:auto;max-width:110px;display:block}
+.prog .praise{font:10px Silkscreen;border:1px solid #000;padding:2px 6px;text-decoration:none;color:#000;background:#fff}
+.tomrow .tom2{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:center}
+.tomrow .tpanel{margin:0}
+.tomrow .tpanel .wa{width:100%;height:auto;display:block;border:1px solid #d0d0d0;border-radius:14px}
+.tomrow .tpanel .xpost{margin:0}
+.tomrow .tcap{text-align:center;margin:12px 0 0}
+@media(max-width:800px){.tomrow .tom2{grid-template-columns:1fr}}
+.tlsa .body{display:flex;gap:12px;align-items:flex-start}
+.tlsa{cursor:default}
+.frame.yt.mini{width:160px;flex:0 0 160px;aspect-ratio:16/9;height:auto;position:relative;border:2px solid #000;cursor:pointer;overflow:hidden}
+.frame.yt.mini.playing{width:480px;flex-basis:480px;max-width:100%}
+.frame.yt.mini .play svg{width:28px!important;height:28px!important}
+.tlsa:hover .body{background:transparent!important;color:inherit!important}
+#intro.hint{max-width:1100px;margin:16px auto 0;padding:0 12px;text-align:center;font-size:13px}
