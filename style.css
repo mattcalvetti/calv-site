@@ -205,3 +205,19 @@ a{color:#000}
 .swin img[src*="sachin-email"]{aspect-ratio:auto!important;object-fit:contain!important;height:auto!important;width:100%!important}
 #boot .voice{font-family:Silkscreen,Chicago,monospace;font-size:15px;line-height:1.5;max-width:30em;margin:18px auto 16px;border:2px solid #000;padding:10px 14px;background:#fff;box-shadow:3px 3px 0 #000}
 .photos:has(img[src*="first-signing"]){grid-template-columns:minmax(0,260px)}
+/* v20 worked on */
+.vtile .wb{padding:0 0 12px}.vtile .frame{border-bottom:2px solid #000}
+
+.vtile .vt{padding:10px 12px 0}.vtile h3{margin:0 0 2px;font-size:15px}
+.vmeta{font:11px Silkscreen;color:#555;margin-bottom:4px}.v1{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.vmore{margin-top:6px}.vmore summary{cursor:pointer;font:11px Silkscreen;list-style:none;display:inline-block;border:1.5px solid #000;border-radius:8px;padding:0 6px}
+.vmore[open] summary{background:#000;color:#fff}.vmore p{margin:6px 0}
+.onb{display:inline-block;margin-top:6px}
+.spotw .vtile .wb{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);padding:0}
+.spotw .vtile .frame{border-bottom:0;border-right:2px solid #000}.spotw .vtile .vt{padding:16px}.spotw .vtile .v1{white-space:normal}
+@media(max-width:800px){.spotw .vtile .wb{grid-template-columns:1fr}.spotw .vtile .frame{border-right:0;border-bottom:2px solid #000}}
+.blk.pulse{outline:4px solid #000;outline-offset:4px;animation:pl .6s ease-in-out 3 alternate}
+@keyframes pl{from{outline-offset:2px}to{outline-offset:8px}}
+.frame .play svg{width:56px!important;height:56px!important}.spotw .frame .play svg{width:72px!important;height:72px!important}
+.frame .play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+#work > p.small.muted{background:#fff;display:inline-block;padding:2px 8px;border:1.5px solid #000}

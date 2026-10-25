@@ -49,10 +49,10 @@ const card=b=>{const el=document.createElement("div");el.className="win blk";el.
 function render(){const L=$("#colL"),R=$("#colR");
  BLOCKS.forEach(b=>{if(b.sec==="Things I'm interested in")L.append(card(b));else if(b.sec==="Things I've worked on")R.append(card(b));
 });
- const vt=v=>`<div class="win wt${v.spot?' spot':''}"><div class="tb"><span>${v.k}</span></div><div class="wb">${v.li?`<div class="frame li-f"><iframe class="lie" src="https://www.linkedin.com/embed/feed/update/${v.li}" loading="lazy" allowfullscreen title="${v.t}"></iframe></div>`:vplayer(v)}<div class="vt"><h3>${v.t}</h3><div class="small">${v.d}</div>${v.x?`<div class="small vx">${v.x}<a href="${BOOK}" target="_blank" rel="noopener">From the case study book ↗</a></div>`:''}<div class="small muted vm">${v.m?v.m+' on LinkedIn · ':''}${v.u?`<a href="${v.u}" target="_blank" rel="noopener">view on LinkedIn ↗</a>`:'plays here'}</div></div></div></div>`;
+ const vt=v=>`<div class="win wt vtile${v.spot?' spot':''}"><div class="tb"><span>${v.c}</span></div><div class="wb">${vplayer(v)}<div class="vt"><h3>${v.t}</h3><div class="vmeta">${v.c} · ${v.date}</div><div class="small v1">${v.d}</div>${(v.x||v.m||v.u)?`<details class="vmore"><summary>more</summary>${v.x?`<p class="small">${v.x}</p>`:''}<p class="small muted">${v.m?v.m+' on LinkedIn. ':''}${v.u?`<a href="${v.u}" target="_blank" rel="noopener">View on LinkedIn ↗</a>`:''}</p></details>`:''}<a href="#" class="small onb" data-board="videos">On the Board ▸</a></div></div></div>`;
  $("#gVid").innerHTML=DZ+`<div class="spotw">${VIDEOS.filter(v=>v.spot).map(vt).join("")}</div><div class="wgrid">${VIDEOS.filter(v=>!v.spot).map(vt).join("")}</div>`;
  $("#gProg").innerHTML=INPROG.map(p=>`<div class="win wt prog"><div class="tb"><span>${p.k}</span></div><div class="wb">${p.img?`<figure class="mood"><img src="${p.img}" alt="${p.t} moodboard" loading="lazy"><figcaption>${p.cap}</figcaption></figure>`:`<div class="frame blank"><span class="fl">in development</span></div>`}<h3>${p.t}</h3><div class="small">${p.d}</div></div></div>`).join("");
- WORK.map(T).forEach(b=>{const el=document.createElement("div");el.className="win wt blk";el.innerHTML=`<div class="tb"><span>${KIND(b)==="Path"?"Project":"Worked on"}</span></div><div class="wb"><h3>${b.title}</h3><div class="small">${b.body.replace(/<[^>]+>/g," ").slice(0,150)}${b.body.length>150?"…":""}</div><div class="more">Open ▸</div></div>`;el.onclick=()=>open(b);$("#gWork").append(el)});
+
  draw();window.onresize=draw;
  const tl=$("#timeline");TL.map(T).filter(Boolean).forEach(b=>{const r=document.createElement("div");r.className="tl";r.innerHTML=`<div class="yr">${b.when||""}</div><div class="ln"></div><div class="body"><b>${b.title}</b> <small>· ${b.sec}</small><div class="small">${b.why}</div><span class="op">open ▸</span></div>`;r.tabIndex=0;r.onkeydown=e=>{if(e.key==="Enter")open(b)};r.onclick=()=>open(b);tl.append(r)});}
 function draw(){const svg=$("#threads"),G=$("#cols").getBoundingClientRect();svg.innerHTML="";const NS="http://www.w3.org/2000/svg";
@@ -125,3 +125,10 @@ $("#gSig").innerHTML=SIGB.map(sigCard).join("");
 document.addEventListener("keydown",e=>{const c=e.target.closest&&e.target.closest(".sig[data-open]");if(c&&e.key==="Enter"){e.preventDefault();open(T(c.dataset.open))}});
 if(location.hash.startsWith("#open")||sessionStorage.getItem("calv-unlocked"))unlock();
 const q=new URLSearchParams(location.search);if(q.get("about"))setTimeout(()=>show("#about"),80);if(q.get("v"))setTimeout(()=>go(q.get("v")),50);if(q.get("card"))setTimeout(()=>{q.get("card").split(",").forEach((c,i)=>open(T(c),i>0))},80);if(q.get("menu"))setTimeout(()=>$("#m"+q.get("menu")).classList.add("open"),80);
+
+// v20: cross-link to the Board. Switch view, scroll to the card(s), pulse them and their threads.
+function showOnBoard(ids){ids=[].concat(ids);STACK=[];renderStack();go("board");
+ setTimeout(()=>{const el=$("#b-"+ids[0]);if(!el)return;draw();el.scrollIntoView({behavior:"smooth",block:"center"});
+  ids.forEach(id=>{const c=$("#b-"+id);if(c)c.classList.add("pulse")});focus(ids[0],1);
+  setTimeout(()=>{ids.forEach(id=>{const c=$("#b-"+id);if(c)c.classList.remove("pulse")});focus(ids[0],0)},2600)},60)}
+document.addEventListener("click",e=>{const l=e.target.closest("[data-board]");if(l){e.preventDefault();e.stopPropagation();showOnBoard(l.dataset.board.split(","))}},true);
