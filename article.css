@@ -1,0 +1,16 @@
+@font-face{font-family:Chicago;src:local("Chicago")}
+*{box-sizing:border-box}body{margin:0;background:#fff;color:#0f1419;font:18px/1.65 -apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+.top{position:sticky;top:0;display:flex;justify-content:space-between;padding:10px 18px;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #eff3f4;font-size:14px;z-index:2}
+.top a,footer a{color:#0f1419;font-weight:600;text-decoration:none}.top span{color:#536471}
+article{max-width:640px;margin:0 auto;padding:36px 20px 80px}
+h1{font-size:40px;line-height:1.15;letter-spacing:-.02em;margin:8px 0 20px;font-weight:800}
+.by{display:flex;gap:12px;align-items:center;padding-bottom:22px;margin-bottom:28px;border-bottom:1px solid #eff3f4}
+.by img{border-radius:50%}.by b{display:block;font-size:16px}.by span{color:#536471;font-size:15px}
+h2{font-size:26px;line-height:1.25;margin:44px 0 10px;font-weight:800;letter-spacing:-.01em}
+p{margin:0 0 18px}a{color:#1d9bf0}
+figure{margin:26px 0}figure img{display:block;width:100%;height:auto}
+figure.post{border:1px solid #cfd9de;border-radius:16px;overflow:hidden;max-width:560px;margin-left:auto;margin-right:auto}
+figure.ph img{border-radius:16px}
+figcaption{font-size:13px;color:#536471;padding:8px 14px;border-top:1px solid #eff3f4}figure.ph figcaption{border:0;padding:8px 0}
+footer{border-top:1px solid #eff3f4;margin-top:40px;padding-top:16px;color:#536471;font-size:14px}
+@media(max-width:600px){body{font-size:17px}h1{font-size:32px}}
