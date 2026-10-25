@@ -200,3 +200,4 @@ a{color:#000}
 @media(max-width:800px){.spotw .wt .wb,.tomrow .tomgrid{grid-template-columns:1fr}.spotw .frame{border-right:0;border-bottom:2px solid #000}.conn2 svg{transform:rotate(90deg);height:40px;width:40px;margin:0 auto}.frame.li-f,.spotw .frame.li-f{height:480px}}
 .frame.li-f{display:flex;justify-content:center;background:#f3f3f3}.frame.li-f iframe{width:504px;max-width:100%}
 #menubar .mail{margin-left:auto;text-decoration:none;color:#000;border:2px solid #000;border-radius:10px;padding:0 8px}#menubar .mail:hover{background:#000;color:#fff}
+.ev{border-top:2px solid #000;margin-top:12px;padding-top:8px}.ev .rl{font-family:Silkscreen;font-size:12px;margin-bottom:6px}.ev a{display:block;margin:3px 0}
