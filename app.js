@@ -33,17 +33,23 @@ let unlocked=false;
 function unlock(){/* local gate only; see note above */if(unlocked)return;unlocked=true;try{sessionStorage.setItem("calv-unlocked","1")}catch(e){}const bt=$("#boot");if(bt)bt.remove();$("#desk").hidden=false;render();}
 
 // board
+const DZ='<svg width="0" height="0" style="position:absolute"><defs><pattern id="dz" width="4" height="4" patternUnits="userSpaceOnUse"><rect width="4" height="4" fill="#fff"/><rect width="1" height="1"/><rect x="2" y="2" width="1" height="1"/></pattern></defs></svg>';
+// Native video: self-hosted MP4 in /video/ or a direct file URL. 1-bit poster + play button; plays in place, never links out.
+function vplayer(v){const has=!!v.src;
+ return `<div class="frame vp${has?' ready':''}" ${has?`data-src="${v.src}" role="button" tabindex="0" aria-label="Play ${v.t}"`:''}>${v.poster?`<img class="poster" src="${v.poster}" alt="">`:`<svg viewBox="0 0 160 90" preserveAspectRatio="none"><rect width="160" height="90" fill="url(#dz)"/></svg>`}<span class="play" aria-hidden="true"><svg viewBox="0 0 40 40" width="56" height="56"><rect x="1" y="1" width="38" height="38" rx="6" fill="#fff" stroke="#000" stroke-width="2"/><polygon points="15,11 15,29 29,20" fill="#000"/></svg></span><span class="fl">${has?"play":"video coming"}</span></div>`}
+function playV(fr){const v=document.createElement("video");v.src=fr.dataset.src;v.controls=true;v.autoplay=true;v.playsInline=true;v.preload="metadata";fr.innerHTML="";fr.classList.add("playing");fr.removeAttribute("role");fr.append(v);v.play().catch(()=>{})}
+document.addEventListener("click",e=>{const fr=e.target.closest(".vp.ready:not(.playing)");if(fr)playV(fr)});
+document.addEventListener("keydown",e=>{const fr=e.target.closest&&e.target.closest(".vp.ready:not(.playing)");if(fr&&(e.key==="Enter"||e.key===" ")){e.preventDefault();playV(fr)}});
 const card=b=>{const el=document.createElement("div");el.className="win blk";el.id="b-"+b.id;
  el.innerHTML=`<div class="tb"><span>${b.id}</span></div><div class="wb">${b.ph?'<span class="ph">PLACEHOLDER</span>':''}<h3>${b.title}</h3><div class="small">${b.body}</div><div class="why">↳ ${b.why}</div><div class="more">Tap for my read ▸</div></div>`;
  el.onclick=()=>open(b);el.onmouseenter=()=>focus(b.id,1);el.onmouseleave=()=>focus(b.id,0);return el};
 function render(){const L=$("#colL"),R=$("#colR");
  BLOCKS.forEach(b=>{if(b.sec==="Things I'm interested in")L.append(card(b));else if(b.sec==="Things I've worked on")R.append(card(b));
 });
- const frame=(t,sub)=>`<div class="frame"><svg viewBox="0 0 160 90" preserveAspectRatio="none"><rect width="160" height="90" fill="url(#dz)"/><polygon points="68,30 68,60 94,45" fill="#fff" stroke="#000" stroke-width="2"/></svg><span class="fl">${sub}</span></div>`;
- $("#gVid").innerHTML='<svg width="0" height="0" style="position:absolute"><defs><pattern id="dz" width="4" height="4" patternUnits="userSpaceOnUse"><rect width="4" height="4" fill="#fff"/><rect width="1" height="1"/><rect x="2" y="2" width="1" height="1"/></pattern></defs></svg>'+VIDEOS.map(v=>`<div class="win wt${v.empty?' empty':''}"><div class="tb"><span>${v.k}</span></div><div class="wb">${v.empty?'<div class="frame blank"><span class="fl">more coming</span></div><h3>More coming</h3>':frame(v.t,"video coming")+`<h3>${v.t}</h3><div class="small">${v.d}</div>`}</div></div>`).join("");
+ $("#gVid").innerHTML=DZ+VIDEOS.map(v=>`<div class="win wt${v.empty?' empty':''}"><div class="tb"><span>${v.k}</span></div><div class="wb">${v.empty?'<div class="frame blank"><span class="fl">more coming</span></div><h3>More coming</h3>':vplayer(v)+`<h3>${v.t}</h3><div class="small">${v.d}</div>`}</div></div>`).join("");
  WORK.map(T).forEach(b=>{const el=document.createElement("div");el.className="win wt blk";el.innerHTML=`<div class="tb"><span>${KIND(b)==="Path"?"Project":"Worked on"}</span></div><div class="wb"><h3>${b.title}</h3><div class="small">${b.body.replace(/<[^>]+>/g," ").slice(0,150)}${b.body.length>150?"…":""}</div><div class="more">Open ▸</div></div>`;el.onclick=()=>open(b);$("#gWork").append(el)});
  draw();window.onresize=draw;
- const tl=$("#timeline");TL.map(T).filter(Boolean).forEach(b=>{const r=document.createElement("div");r.className="tl";r.innerHTML=`<div class="yr">${b.when||""}</div><div class="ln"></div><div class="body"><b>${b.title}</b> <small>· ${b.sec}</small><div class="small">${b.why}</div></div>`;r.onclick=()=>open(b);tl.append(r)});}
+ const tl=$("#timeline");TL.map(T).filter(Boolean).forEach(b=>{const r=document.createElement("div");r.className="tl";r.innerHTML=`<div class="yr">${b.when||""}</div><div class="ln"></div><div class="body"><b>${b.title}</b> <small>· ${b.sec}</small><div class="small">${b.why}</div><span class="op">open ▸</span></div>`;r.tabIndex=0;r.onkeydown=e=>{if(e.key==="Enter")open(b)};r.onclick=()=>open(b);tl.append(r)});}
 function draw(){const svg=$("#threads"),G=$("#cols").getBoundingClientRect();svg.innerHTML="";const NS="http://www.w3.org/2000/svg";
  THREADS.forEach(([f,t,lab])=>{const A=$("#b-"+f).getBoundingClientRect(),C=$("#b-"+t).getBoundingClientRect();
   const x1=A.right-G.left,y1=A.top+A.height/2-G.top,x2=C.left-G.left,y2=C.top+C.height/2-G.top,mx=(x1+x2)/2;
@@ -54,25 +60,38 @@ function focus(id,on){const rel=new Set([id]);THREADS.forEach(([f,t])=>{if(f===i
  document.querySelectorAll("#cols .blk").forEach(e=>e.classList.toggle("dim",on&&!rel.has(e.id.slice(2))));
  document.querySelectorAll("#threads > g").forEach(g=>{const hit=g.dataset.k.split(" ").includes(id);g.classList.toggle("on",on&&hit);g.classList.toggle("dimt",on&&!hit)})}
 const T=id=>BLOCKS.find(y=>y.id===id);
-let PATH=[];
 const KIND=b=>b.sec==="Things I'm interested in"?"Interested":b.sec==="Things I've worked on"?"Worked on":b.sec==="Path"?"Path":"Cosign";
 function nbrs(b){const m=new Map();THREADS.forEach(x=>{if(x[0]===b.id)m.set(x[1],x[2]);if(x[1]===b.id)m.set(x[0],x[2])});
  (b.links||[]).forEach(id=>{if(T(id)&&!m.has(id))m.set(id,"")});BLOCKS.forEach(o=>{if((o.links||[]).includes(b.id)&&!m.has(o.id))m.set(o.id,"")});return [...m]}
-function open(b,hop){if(!b)return;if(!hop)PATH=[];const k=PATH.indexOf(b.id);if(k>=0)PATH=PATH.slice(0,k+1);else PATH.push(b.id);if(PATH.length>6)PATH=PATH.slice(-6);
- $("#dt").textContent=b.title;const r=READS[b.id];
- const crumb=PATH.length>1?`<div class="crumb">${PATH.map((id,i)=>i<PATH.length-1?`<a href="#" data-hop="${id}">${T(id).title}</a>`:`<b>${T(id).title}</b>`).join(" → ")}</div>`:'';
+// v11: stacked windows. "Connected to" opens a NEW window cascaded on top (classic Mac). Max 5; oldest closes.
+let STACK=[];const MAXW=5;
+function content(b){const r=READS[b.id];
  const strip=nbrs(b).map(([id,lab])=>{const o=T(id);return `<a href="#" class="hop" data-hop="${id}"><span class="k">${KIND(o)}</span>${o.title}${lab?`<i>${lab}</i>`:''}</a>`}).join("");
- $("#db").innerHTML=`${crumb}${b.ph?'<span class="ph">PLACEHOLDER</span>':''}<div class="bd">${b.body}</div>
+ return `${b.ph?'<span class="ph">PLACEHOLDER</span>':''}<div class="bd">${b.body}</div>
  ${r?`<div class="read"><div class="rl">Matt's read</div><p>${r.t}</p></div>`:''}
  <p class="why">↳ ${b.why}</p>${b.embed?`<div class="embed win"><div class="tb"><span>linkedin.com · Matt C.</span></div><div class="wb small"><p>“Dialled concept for a couple of reasons: 1. Co-signs are pretty scattered &amp; require baseline follower hygiene/knowing what to look for… 2. Question count introduces scarcity… 3. Second order effect, gives the folk at a16z the ability to see who’s got their talent spotting eye in/tastemaker sense.”</p><p class="muted">Reposting the a16z Cosign launch · Aug 2026</p></div></div>`:''}
- ${b.imgs&&b.imgs.length?`<div class="imgslot">${b.imgs.length?b.imgs.map(u=>`<img src="${u}">`).join(""):''}</div>`:''}
+ ${b.imgs&&b.imgs.length?`<div class="photos">${b.imgs.map(u=>`<figure class="pf"><img src="${u}" alt="${b.title}" loading="lazy"></figure>`).join("")}</div>${b.imgCap?`<p class="small muted">${b.imgCap}</p>`:''}`:''}
  ${b.url?`<p><a href="${b.url}" ${b.url.startsWith("?")?'':'target="_blank" rel="noopener"'}>${b.urlLab||"Open original ↗"}</a></p>`:''}
- ${strip?`<div class="conn"><div class="rl">Connected to</div><div class="strip">${strip}</div></div>`:''}
- ${b.when?`<p class="small muted">When: ${b.when}</p>`:""}`;show("#detail");$("#detail").scrollTop=0;
- document.querySelectorAll(".blk").forEach(e=>e.classList.toggle("hi",e.id==="b-"+b.id))}
-function show(s){document.querySelectorAll(".modal").forEach(m=>m.hidden=true);$(s).hidden=false}
+ ${strip?`<div class="conn"><div class="rl">Connected to · opens a new window</div><div class="strip">${strip}</div></div>`:''}
+ ${b.when?`<p class="small muted">When: ${b.when}</p>`:""}`}
+function open(b,hop){if(!b)return;
+ if(!hop)STACK=[b.id];else{const k=STACK.indexOf(b.id);if(k>=0)STACK=STACK.slice(0,k+1);else STACK.push(b.id);if(STACK.length>MAXW)STACK=STACK.slice(-MAXW)}
+ renderStack()}
+function renderStack(){const st=$("#stack");document.querySelectorAll(".modal").forEach(m=>m.hidden=true);
+ if(!STACK.length){st.hidden=true;st.innerHTML="";document.querySelectorAll(".blk").forEach(e=>e.classList.remove("hi"));return}
+ st.hidden=false;const n=STACK.length;
+ const trail=n>1?`<div class="crumb">${STACK.map((id,i)=>i<n-1?`<a href="#" data-to="${i}">${T(id).title}</a>`:`<b>${T(id).title}</b>`).join(" ▸ ")}</div>`:'';
+ st.innerHTML=STACK.map((id,i)=>{const b=T(id),top=i===n-1;
+  return `<div class="win swin${top?' top':''}" style="--i:${i}" data-to="${top?'':i}"><div class="tb"><i class="cb" data-pop="${i}" role="button" tabindex="0" aria-label="Close"></i><span>${b.title}</span>${n>1?`<em class="cnt">${i+1}/${n}</em>`:''}</div>
+  <div class="wb">${top?`${n>1?`<button type="button" class="back txtbtn" data-pop="${i}">◂ Back to ${T(STACK[i-1]).title}</button>`:''}${trail}${content(b)}`:''}</div></div>`}).join("");
+ const t=st.querySelector(".swin.top .wb");if(t)t.scrollTop=0;
+ const cur=STACK[n-1];document.querySelectorAll(".blk").forEach(e=>e.classList.toggle("hi",e.id==="b-"+cur))}
+function pop(i){STACK=STACK.slice(0,i);renderStack()}
+function show(s){document.querySelectorAll(".modal").forEach(m=>m.hidden=true);STACK=[];renderStack();$(s).hidden=false}
 document.addEventListener("click",e=>{const d=e.target.dataset;
  if(d.close!==undefined)e.target.closest(".modal").hidden=true;
+ if(d.pop!==undefined){e.preventDefault();e.stopPropagation();pop(+d.pop);return}
+ const tw=e.target.closest("[data-to]");if(tw&&tw.dataset.to!==""){e.preventDefault();STACK=STACK.slice(0,+tw.dataset.to+1);renderStack();return}
  if(d.open){e.preventDefault();open(T(d.open))}
  if(d.hop){e.preventDefault();open(T(d.hop),1)}
  if(d.go){go(d.go);closeMenus()}
@@ -81,12 +100,13 @@ document.addEventListener("click",e=>{const d=e.target.dataset;
  const mt=e.target.closest(".mt");if(mt){const m=mt.parentElement,was=m.classList.contains("open");closeMenus();if(!was)m.classList.add("open")}
  else if(!e.target.closest(".dd"))closeMenus()});
 const closeMenus=()=>document.querySelectorAll(".menu").forEach(m=>m.classList.remove("open"));
-const VIEWS=["board","work","timeline","signals"];document.addEventListener("keydown",e=>{if(e.key==="Escape")document.querySelectorAll(".modal").forEach(m=>m.hidden=true)});
+const VIEWS=["board","work","timeline","signals"];document.addEventListener("keydown",e=>{if(e.key==="Escape"){if(STACK.length)pop(STACK.length-1);else document.querySelectorAll(".modal").forEach(m=>m.hidden=true)}});
 function go(v){let drawer=null;if(v==="read"||v==="beyond"){show("#beyond");return}if(v==="cos")drawer="#cosTop",v="board";if(v==="interested")drawer="#board",v="board";
- VIEWS.forEach(x=>$("#"+x).hidden=x!==v);$("#roleline").hidden=v!=="board";$("#cosTop").hidden=v!=="board";
+ VIEWS.forEach(x=>$("#"+x).hidden=x!==v);$("#roleline").hidden=v!=="board";$("#thesis").hidden=v!=="board";$("#cosTop").hidden=v!=="board";
  document.querySelectorAll(".vw").forEach(s=>s.classList.toggle("on",s.dataset.go===v));
  if(v==="board")draw();if(drawer)setTimeout(()=>{const d=$(drawer);if(d.tagName==="DETAILS")d.open=true;d.scrollIntoView({behavior:"smooth"})},30)}
-// thesis parked (v10)
+// thesis (v11)
+{const th=$("#thesis");if(th)th.textContent=THESES[THESIS_PICK]}
 // beyond work
 $("#gBeyond").innerHTML=BEYOND.map(g=>`<div class="win bw"><div class="tb"><span>${g.h}</span></div><div class="wb">${g.note?`<p class="small note">${g.note}</p>`:''}<ul>${g.items.map(x=>x.sub?`<li class="sub">${x.sub}</li>`:`<li>${x.u?`<a href="${x.u}" target="_blank" rel="noopener">${x.t}</a>`:`<b>${x.t}</b>`}${x.a?` <span class="muted">· ${x.a}</span>`:''}${x.chk?' <span class="dr">[check]</span>':''}</li>`).join("")}</ul></div></div>`).join("");
 // embeds: hide static fallback once the LinkedIn iframe loads; X blockquote is its own fallback

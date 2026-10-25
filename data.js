@@ -1,51 +1,50 @@
 // Every block: id, sec, title, body, why (ties to thesis), when (timeline), links (thread ids), ph (placeholder?)
-// THESIS IS A PLACEHOLDER (Calv: current wording "a little cringe", may not ship). [0] is shown.
-// PARKED (v10): thesis removed from the Board. Options kept for later, unused.
+// Thesis (v11): THESIS_PICK is shown, quietly, at the top of the Board. All three drafted by Grok Bot for Calv to approve.
 const THESES=[
-"Founder-led storytelling. Backing people early.",
-"When intelligence is abundant, value accrues to what can't be replicated: trust, taste, and stories that last. I spend my time helping founders tell theirs.",
-"Founder-led storytelling is Lindy. Everything else gets cheaper after AGI; the founder's own voice and the people who believe in it compound.",
-"I back what lasts: people before the market sees them, and founder stories built to outlive the feed."];
+"When everything is buildable, the hard part is choosing what is worth building and which darlings to kill. I'm interested in the few things that hold up long enough to become Lindy, if any do.",
+"Almost anything can be built now, so taste mostly comes down to what you choose to make and what you let go of. I want to work on the things that still matter in ten years.",
+"Thrive Eternal asks what lasts. With everything buildable, my answer so far is to build less, kill more darlings and keep the few things that stand up over time."];
+const THESIS_PICK=0;
 const BLOCKS=[
 // Interested in (order chosen so threads never cross)
-{id:"scout",sec:"Things I'm interested in",title:"Talent scouting",body:"David Booth's framing of the talent scout as a craft. My first business, Immense Talent Group, was scouting too.",why:"Seeing people before the market does sits at the core of what I believe.",when:"Ongoing",links:["cosign","ovitz"]},
-{id:"conviction",sec:"Things I'm interested in",title:"Conviction bets / talent spotting",body:"Backing a person before the numbers make it obvious.",why:"I use the same read on creators that I use with my own money, weighing talent, timeline sentiment and analysis.",when:"Ongoing",links:["hyper","scout"]},
-{id:"cosign",sec:"Things I'm interested in",title:"How cosigns work",embed:1,url:"https://www.linkedin.com/feed/update/urn:li:activity:7498919055244947456/",urlLab:"My cosign breakdown on LinkedIn ↗",body:"How the a16z team (Erik Torenberg and co) think about co-signs as a mechanic.",why:"A cosign is how early conviction gets transferred to capital and audiences.",when:"Ongoing",links:["article","thrive"]},
-{id:"thrive",sec:"Things I'm interested in",title:"Lindy & what lasts",body:"Longing, Lindy culture, and assets technology can't replicate. Thrive Eternal's thesis on iconic institutions put words to it.",why:"Where I think value accrues in a post-AGI world.",when:"Ongoing",links:["lps"]},
-{id:"fdssig",sec:"Things I'm interested in",title:"#fds-signals",body:"Our internal channel for the signals strategists spot across the creative landscape.",why:"This is how raw taste turns into something the team can encode.",when:"Kindling",url:"?v=signals",urlLab:"Open the Signals view ▸",links:["harness"]},
-{id:"lps",sec:"Things I'm interested in",title:"LPs and tech media creatives",body:"Being the interconnective tissue between capital and the people who make culture around it.",why:"Put plainly, this is the job I want to be doing.",when:"Ongoing",links:["dylan","sachadam"]},
+{id:"scout",sec:"Things I'm interested in",title:"Talent scouting",body:"David Booth's framing of the talent scout as a craft. My first business, Immense Talent Group, was scouting too.",why:"I have always liked spotting people early.",when:"Ongoing",links:["cosign","ovitz"]},
+{id:"conviction",sec:"Things I'm interested in",title:"Conviction bets",body:"Backing a person before the numbers make it obvious.",why:"I read creators the same way I read a position I hold with my own money.",when:"Ongoing",links:["hyper","scout"]},
+{id:"cosign",sec:"Things I'm interested in",title:"How cosigns work",embed:1,url:"https://www.linkedin.com/feed/update/urn:li:activity:7498919055244947456/",urlLab:"My cosign breakdown on LinkedIn ↗",body:"How the a16z team (Erik Torenberg and co) think about co-signs as a mechanic.",why:"A cosign passes one person's belief in you on to the people who trust them.",when:"Ongoing",links:["article","thrive"]},
+{id:"thrive",sec:"Things I'm interested in",title:"Lindy & what lasts",body:"Which things hold up over time. Thrive Eternal's writing on lasting institutions put words to it for me.",why:"If everything can be built, I want to know what is worth keeping.",when:"Ongoing",links:["lps"]},
+{id:"fdssig",sec:"Things I'm interested in",title:"#fds-signals",body:"Our internal channel for the signals strategists spot across the creative landscape.",why:"It is where the team's taste gets written down.",when:"Kindling",url:"?v=signals",urlLab:"Open the Signals view ▸",links:["harness"]},
+{id:"lps",sec:"Things I'm interested in",title:"LPs and tech media creatives",body:"Sitting between the people with capital and the people who make culture around it.",why:"It is the kind of work I want more of.",when:"Ongoing",links:["dylan","sachadam"]},
 {id:"dylan",sec:"Things I'm interested in",title:"The Dylan Abruscato archetype",body:"Brand strategist, then Senior Director of Brand Strategy at Postmates (acquired by Uber), now President of TBPN alongside John Coogan and Jordi Hays.",why:"A north star.",when:"2026",links:["dylanx","brent","sachadam"]},
 {id:"brent",sec:"Things I'm interested in",title:"Brent Liang and MTS",body:"Brent helped shape a16z's thinking on new media and backed MTS (Monitoring the Situation), then left to build it himself.",why:"Watching someone go from backing new media to building it.",when:"2026",url:"https://www.a16z.news/p/monitoring-the-situation",urlLab:"a16z: Monitoring the Situation ↗",links:["dylan","cosign","erik"]},
-{id:"ovitz",sec:"Things I'm interested in",title:"Ovitz & Ogilvy, the people who did this first",body:"Michael Ovitz, the agent as kingmaker, and David Ogilvy, who made persuasion a craft.",why:"Both of them show that the connector and the storyteller have always held a seat of real power.",when:"Ongoing",links:["dylan","itg"]},
-{id:"friction",sec:"Things I'm interested in",title:"Reintroducing friction",body:"Choosing the harder and slower version of something on purpose.",why:"Friction is where I reset and reflect and where my taste comes back to me.",when:"Ongoing",links:["yala","senescence"]},
-{id:"special",sec:"Things I'm interested in",title:"Specialised over general",body:"Systems that do one thing extraordinarily well tend to beat general ones at that thing.",why:"I build teams and tools to be opinionated and made for one purpose.",when:"Ongoing",links:["harness"]},
-{id:"agentsi",sec:"Things I'm interested in",title:"Agents as a team",body:"Treating agents as teammates who each have a job and someone they serve.",why:"This is my preference for specialised tools applied to my own week.",when:"Ongoing",links:["special","agentsw"]},
+{id:"ovitz",sec:"Things I'm interested in",title:"Ovitz & Ogilvy",body:"Michael Ovitz, the agent as kingmaker, and David Ogilvy, who made persuasion a craft.",why:"The connector and the storyteller have always mattered, and they were both.",when:"Ongoing",links:["dylan","itg"]},
+{id:"friction",sec:"Things I'm interested in",title:"Reintroducing friction",body:"Choosing the harder and slower version of something on purpose.",why:"It is how I reset and get room to think.",when:"Ongoing",links:["yala","senescence"]},
+{id:"special",sec:"Things I'm interested in",title:"Specialised over general",body:"Tools built for one job usually beat general ones at that job.",why:"I build teams and tools the same way.",when:"Ongoing",links:["harness"]},
+{id:"agentsi",sec:"Things I'm interested in",title:"Agents as a team",body:"Treating agents as teammates who each have a job and someone they serve.",why:"I apply the same idea to my own week.",when:"Ongoing",links:["special","agentsw"]},
 // Worked on
-{id:"itg",sec:"Things I've worked on",title:"Immense Talent Group",body:"My first business, set up when I got back from the UK just after COVID. We sent young footballers from Australian academies to the UK to trial with clubs for scholarships.",why:"Talent scouting in its most literal form.",when:"c. 2021",links:["scout","ovitz"]},
-{id:"email",sec:"Things I've worked on",title:"The first email to Sachin",body:"The cold email that landed the Kindling job.",why:"This was day zero, when I cosigned Kindling before it cosigned me.",when:"",ph:1,links:["fds"]},
-{id:"hyper",sec:"Things I've worked on",title:"Hyperliquid, a conviction position",body:"I opened a position in Hyperliquid at $30 after using the product, and I underwrote both it and its founder, Jeff Yan.",why:"Talent spotting and analysis with my own money in the game.",when:"",links:["conviction","scout"]},
+{id:"itg",sec:"Things I've worked on",title:"Immense Talent Group",body:"My first business, set up when I got back from the UK just after COVID. We sent young footballers from Australian academies to the UK to trial with clubs for scholarships.",why:"It was talent scouting in the literal sense.",when:"c. 2021",links:["scout","ovitz"]},
+{id:"email",sec:"Things I've worked on",title:"The first email to Sachin",body:"The cold email that landed the Kindling job.",why:"I backed Kindling before it backed me.",when:"",ph:1,links:["fds"]},
+{id:"hyper",sec:"Things I've worked on",title:"Hyperliquid, a conviction position",body:"I opened a position in Hyperliquid at $30 after using the product, and I was backing its founder, Jeff Yan, as much as the token.",why:"I put my own money behind my read.",when:"Feb 2026",links:["conviction","scout"]},
 {id:"cospost",sec:"Things I've worked on",title:"Why cosigns matter (LinkedIn)",body:"My breakdown of the cosign mechanic, posted before a16z shipped Cosign.",why:"I shared my early thinking on the mechanic in public.",when:"Aug 2026",url:"https://www.linkedin.com/feed/update/urn:li:activity:7498919055244947456/",urlLab:"Open the post on LinkedIn ↗",embed:1,links:["scout"]},
-{id:"article",sec:"Things I've worked on",title:"The cosigns article (draft)",body:"An essay on cosigns and how conviction travels between people.",why:"I am writing down the mechanic I practise every day.",when:"2026",ph:1,links:["dylanx"]},
-{id:"distil",sec:"Things I've worked on",title:"Distillation into learnings",body:"How raw material gets distilled into top-line learnings the team can act on.",why:"Spotting signal early is scouting applied to information instead of people.",when:"Kindling",links:["harness"]},
-{id:"fds",sec:"Things I've worked on",title:"FDS at Kindling",body:"Founding team at Kindling and head of FDS, leading a team of soon to be six strategists. FDS runs organic content for B2B tech founders.",why:"This is where I turn taste into a repeatable system for founders.",when:"Since joining Kindling",links:["harness","distil","videos"]},
-{id:"videos",sec:"Things I've worked on",title:"Customer videos",body:"Videos I've made for Kindling customers, including the HIO RPO mission, the Pass Series A announcement and behind the scenes of the Meridian launch. See the Worked on view.",url:"?v=work",urlLab:"Open the Worked on view ▸",why:"This is the storytelling side of my work, out in the world.",when:"Kindling",ph:1,links:["sachadam"]},
-{id:"senescence",sec:"Things I've worked on",title:"Senescence",body:"My year 12 short film, named for the Latin word for the slow decline that comes with age.",why:"It was the first time I told a story with a camera, long before it was my job.",when:"Year 12",ph:1,links:["email"]},
-{id:"yala",sec:"Things I've worked on",title:"Yala Peak, Himalayas",body:"A solo summit of Yala Peak followed by time in Kathmandu, a city that felt soulful.",why:"I went to reintroduce friction into my life and came back with room to reflect.",when:"Apr 2025",ph:1,imgs:[],links:["friction","senescence"]},
-{id:"harness",sec:"Things I've worked on",title:"The harness",body:"Chained skills that work like a master prompt for idea generation, plus templates for organic strategy.",why:"It takes a scout's instinct and makes it something the whole team can use.",when:"Kindling",links:["agentsw"]},
+{id:"article",sec:"Things I've worked on",title:"The cosigns article (draft)",body:"An essay on cosigns and how conviction travels between people.",why:"I am writing up how I think cosigns work.",when:"2026",ph:1,links:["dylanx"]},
+{id:"distil",sec:"Things I've worked on",title:"Distillation into learnings",body:"How raw material gets distilled into top-line learnings the team can act on.",why:"It is the same habit as scouting, used on information.",when:"Kindling",links:["harness"]},
+{id:"fds",sec:"Things I've worked on",title:"FDS at Kindling",body:"Founding team at Kindling and head of FDS, leading a team of soon to be six strategists. FDS runs organic content for B2B tech founders.",why:"It is where taste has to become something a team can repeat.",when:"Since joining Kindling",links:["harness","distil","videos"]},
+{id:"videos",sec:"Things I've worked on",title:"Customer videos",body:"Videos I've made for Kindling customers, including the HIO RPO mission, the Pass Series A announcement and behind the scenes of the Meridian launch. See the Worked on view.",url:"?v=work",urlLab:"Open the Worked on view ▸",why:"The work people actually see.",when:"Kindling",ph:1,links:["sachadam"]},
+{id:"senescence",sec:"Things I've worked on",title:"Senescence",body:"My year 12 short film, named for the Latin word for the slow decline that comes with age.",why:"I was telling stories with a camera well before it was my job.",when:"Year 12",ph:1,links:["email"]},
+{id:"yala",sec:"Things I've worked on",title:"Yala Peak, Himalayas",body:"Yala Peak (5,600m) in the Himalayas, 11 days on foot, then time in Kathmandu, a city that felt soulful.",why:"I wanted some friction and came back with room to think.",when:"Apr 2025",imgs:["img/yala-1.jpg","img/yala-2.jpg","img/yala-3.jpg"],imgCap:"From my Instagram, April 2025",links:["friction","senescence"]},
+{id:"harness",sec:"Things I've worked on",title:"The harness",body:"Chained skills that work like a master prompt for idea generation, plus templates for organic strategy.",why:"It lets the whole team use instincts that used to sit with one person.",when:"Kindling",links:["agentsw"]},
 {id:"agentsw",sec:"Things I've worked on",title:"How I work with agents",body:"<ul class=\"jobs\"><li><b>Customer health dashboard</b>, refreshed by scheduled agents reading Slack sentiment.</li><li><b>Ramping a new strategist</b> with morning points and end-of-day check-ins.</li><li><b>Sparring partner</b> for business-model pressure tests.</li><li><b>Overheard</b>, watching Reddit, HN, news and X for customer mentions.</li><li><b>This site</b>, built entirely by voice.</li></ul>",why:"Each agent has one job and one group of people it serves.",when:"2026",links:["agentsi","harness","fds"]},
 // Cosigned (reading now lives in the Beyond work "Reading" pane)
 {id:"frank",sec:"Who's cosigned me",title:"Frank (DeGods) on X",body:"Frank replied “Was already following you but I unfollowed you to refollow you again” on 4 Jun 2023, then “Forbes type beat” and “stay goated” that September.",why:"This comes from my crypto years, when I was a content contributor to DeGods.",when:"Jun 2023",url:"https://x.com/frankdegods/status/1665250022789873664",links:["degods","dylanx","conviction"]},
 {id:"sachpost",sec:"Who's cosigned me",title:"Kindling team profile (Sachin)",body:"Sachin's LinkedIn post featuring me as that week's Kindling team profile.",why:"A public cosign from the founder.",when:"2026",ph:1,url:"https://lnkd.in/p/gjukQpVQ",links:["sachadam"]},
-{id:"erik",sec:"Who's cosigned me",title:"Erik Torenberg post (via Tom)",body:"Tom Duffy sent me Erik's post on talent “whose range can’t be captured in a single label” and added “this is literally you.”",why:"A peer pointed at the role and said it was me.",when:"2026",url:"https://x.com/eriktorenberg/status/2109722369556390210",links:["cosign","scout","brent"]},
+{id:"erik",sec:"Who's cosigned me",title:"Erik Torenberg post (via Tom)",body:"Tom Duffy sent me Erik's post on talent “whose range can’t be captured in a single label” and added “this is literally you.”",why:"Tom thought of me when he saw it.",when:"2026",url:"https://x.com/eriktorenberg/status/2109722369556390210",links:["cosign","scout","brent"]},
 {id:"dylanx",sec:"Who's cosigned me",title:"Dylan (TBPN) on X",body:"Dylan replied “Few” on 18 Sep 2026, and @_AdamMiller_ added “you guys are leading the pack”. The post is shown above.",why:"A tip of the cap that we are thinking along the same lines, and he followed me back.",when:"Sep 2026",url:"https://x.com/DylanAbruscato/status/2100735428131258606",links:["dylan","erik","frank"]},
 // Path: timeline-only entries (not on the board). Undated entries show no date label.
 {id:"london",sec:"Path",title:"Back from the UK",body:"",why:"Came home just after COVID.",when:""},
 {id:"moon",sec:"Path",title:"Moonlighting in tech",body:"",why:"Working on tech on the side.",when:""},
 {id:"web3",sec:"Path",title:"Web3, trader first",body:"",why:"Came into crypto as a trader.",when:""},
-{id:"degods",sec:"Path",title:"DeGods content contributor",body:"I was a content contributor to DeGods, and in Dec 2023 I wrote on X, “Last 6 months been wild… From not having a Canva account to now contributing alongside [the DeGods design team].”",why:"Frank backed the wavelength and vibe over graphic-design know-how.",when:"c. Jun–Dec 2023",url:"https://x.com/0xCalv/status/1733111650197336336"},
-{id:"voicesite",sec:"Path",title:"This site, built by voice",body:"Triangulating disparate threads, from what I'm interested in to what I've worked on and who has vouched for me, into one place. Every part of it was talked through with Grok Bot and none of it was written by hand.",why:"Pulling the threads together in one place.",when:"Oct 2026"},
+{id:"degods",sec:"Path",title:"DeGods content contributor",body:"I was a content contributor to DeGods, and in Dec 2023 I wrote on X, “Last 6 months been wild… From not having a Canva account to now contributing alongside [the DeGods design team].”",why:"Frank cared more about the vibe than about design skills.",when:"c. Jun–Dec 2023",url:"https://x.com/0xCalv/status/1733111650197336336"},
+{id:"voicesite",sec:"Path",title:"This site, built by voice",body:"Pulling what I'm interested in, what I've worked on and who has vouched for me into one place. I talked every part of it through with Grok Bot and wrote none of the code by hand.",why:"An experiment in building by voice.",when:"Oct 2026"},
 {id:"kindling",sec:"Path",title:"Joined Kindling",body:"",why:"Founding team, and head of FDS.",when:""},
-{id:"sachadam",sec:"Who's cosigned me",title:"Sachin & Adam",body:"An existing relationship around their documentary series on emerging tech.",why:"I am already plugged in to the people making this kind of work.",when:"2026",ph:1,links:[]}
+{id:"sachadam",sec:"Who's cosigned me",title:"Sachin & Adam",body:"An existing relationship around their documentary series on emerging tech.",why:"I am a sounding board to them alongside Tom.",when:"2026",ph:1,links:[]}
 ];
 // Threads: interest -> work it shaped. Order of both columns keeps these crossing-free.
 const THREADS=[
@@ -61,27 +60,27 @@ const THREADS=[
 // Matt's read: first-person takes. All written by Grok Bot for Calv to approve (see README).
 const READS={
 itg:{t:"Immense Talent Group was my first business. I was spotting young footballers early and getting them in front of UK clubs, which is the same instinct I bring to people in tech and media now."},
-scout:{t:"Cosigns are scattered across replies, quote posts and follows, so the signal fades unless you know where to look. I wrote about it on LinkedIn before a16z shipped Cosign."},
+scout:{t:"I like spotting people before it is obvious. Immense Talent Group was the literal version, and I still do it with founders and creators."},
 conviction:{t:"I opened a Hyperliquid position at $30 after using the product, and I was backing Jeff Yan as much as the token. I read people the same way."},
-thrive:{t:"When intelligence is abundant, the things that can't be copied get more valuable. A founder telling their own story is one of them."},
+thrive:{t:"When anything can be built, deciding what is worth building gets harder. I want to know what still holds up years after the launch."},
 fdssig:{t:"Our strategists pool what they notice across the creative landscape here, and it feeds the ideas we build for founders."},
 cospost:{t:"I posted this before Cosign dropped, and Sachin replied that it was “still so early innings for co-signers and lighthouses.”"},
 cosign:{t:"I think of a cosign as conviction someone lends you. The part I find most interesting is that a16z gets to see which of its users has an eye for talent."},
 lps:{t:"Capital and culture often talk past each other, and I like the seat in the middle that translates both ways."},
 dylan:{t:"Dylan is a north star for me. He went from brand strategist to strategy director at Postmates and is now President of TBPN, and I pay close attention to that path."},
-brent:{t:"Brent helped shape a16z's thinking on new media and backed the show, then left to build it himself. I find that kind of conviction rare."},
+brent:{t:"Brent helped shape a16z's thinking on new media and backed the show, then left to build it himself. I respect that a lot."},
 dylanx:{t:"When Dylan replied “Few” I read it as a tip of the cap that we are thinking about these things in the same direction, and he followed me back around the same time."},
 ovitz:{t:"Ovitz showed the connector can hold the most powerful seat in the room, and Ogilvy showed persuasion can be learned. I want a bit of both."},
-friction:{t:"So much is easy now that I add friction back on purpose. Climbing Yala Peak solo gave me room to reflect."},
+friction:{t:"So much is easy now that I add friction back on purpose. Yala Peak gave me room to reflect."},
 special:{t:"Something built for one purpose usually beats a general tool at that purpose, and I build teams the same way."},
 email:{t:"I backed Kindling well before it backed me, and the first email I sent Sachin is the record of that."},
-hyper:{t:"I opened the position at $30 because the product felt like a step change, and I still hold it. Read it as a receipt for how I back people, never as advice."},
+hyper:{t:"I opened the position at $30 because the product felt like a step change, and I still hold it. None of this is financial advice."},
 distil:{t:"Most raw material is noise, so the skill is finding the couple of lines that change what the team does on Monday."},
 article:{t:"I'm still finishing the cosigns article, and it will live here once it's done."},
 fds:{t:"I lead a team of soon to be six strategists running organic content for B2B tech founders, and my job is turning taste into a system they can repeat."},
 videos:{t:"The customer videos will be added here soon."},
 senescence:{t:"This was my year 12 short film, and looking back it shows the storytelling instinct was there well before it became my job."},
-yala:{t:"I summited Yala Peak solo and then slowed down in Kathmandu, a city that felt soulful. I chose that friction and came back reset."},
+yala:{t:"I summited Yala Peak and then slowed down in Kathmandu, a city that felt soulful. I chose that friction and came back reset."},
 agentsi:{t:"I treat agents like a team, so each one gets a clear job and someone it serves."},
 agentsw:{t:"These are a handful of narrow agents doing jobs people would let slide, and a person reviews everything they produce."},
 harness:{t:"The harness chains skills together for idea generation and has a view on where people do their best work."}
@@ -125,14 +124,14 @@ const BEYOND=[
  {t:"Sound healing"},{t:"Going from digital back to analog",a:"agency over what we consume"},{t:"Online identity"},{t:"Jazz"},{t:"Wine"},{t:"Community, and things going local"},{t:"Hardware"},{t:"Financial markets"}]}
 ];
 // Timeline order (oldest → newest). Entries with no "when" render without a date label.
-const TL_OLDEST=["senescence","london","itg","moon","web3","degods","frank","hyper","yala","kindling","email","fds","fdssig","distil","harness","agentsw","videos","sachpost","cospost","dylanx","dylan","brent","sachadam","erik","article"];
+const TL_OLDEST=["senescence","london","itg","moon","web3","degods","frank","yala","kindling","email","fds","fdssig","distil","harness","hyper","agentsw","videos","sachpost","cospost","dylanx","dylan","brent","sachadam","erik","article"];
 // Timeline renders newest first.
 const TL=["voicesite",...TL_OLDEST.slice().reverse()];
-// Worked on view. Video titles were dictated by voice; spellings to confirm (see README). thumb:null = 1-bit placeholder frame.
+// Worked on view. Video titles were dictated by voice; spellings to confirm (see README). src = "video/<file>.mp4" or a direct .mp4 URL; poster = image path (shown 1-bit). Empty src = "coming soon" frame.
 const VIDEOS=[
-{t:"HIO RPO mission",k:"Customer video · Kindling",d:"A customer video on HIO's RPO mission.",chk:"Confirm spelling of 'HIO RPO'"},
-{t:"Pass Series A announcement",k:"Customer video · Kindling",d:"The Series A announcement video.",chk:"Dictated as 'past series A'. Is the company Pass?"},
-{t:"Behind the scenes of the Meridian launch",k:"Customer video · Kindling",d:"A behind-the-scenes cut from the Meridian launch.",chk:"Confirm 'Meridian'"},
-{t:"More coming",k:"Slot",empty:1},{t:"More coming",k:"Slot",empty:1},{t:"More coming",k:"Slot",empty:1}];
+{t:"HIO RPO mission",k:"Customer video · Kindling",d:"A customer video on HIO's RPO mission.",src:"",poster:"",chk:"Confirm spelling of 'HIO RPO'"},
+{t:"Pass Series A announcement",k:"Customer video · Kindling",d:"The Series A announcement video.",chk:"Dictated as 'past series A'. Is the company Pass?",src:"",poster:""},
+{t:"Behind the scenes of the Meridian launch",k:"Customer video · Kindling",d:"A behind-the-scenes cut from the Meridian launch.",src:"",poster:"",chk:"Confirm 'Meridian'"},
+{t:"Senescence",k:"Short film · year 12",d:"My year 12 short film.",src:"",poster:""},{t:"More coming",k:"Slot",empty:1},{t:"More coming",k:"Slot",empty:1}];
 // Worked on view is canonical: same items and order as the Board's right column (videos have their own row above).
 const WORK=BLOCKS.filter(b=>b.sec==="Things I've worked on"&&b.id!=="videos").map(b=>b.id);

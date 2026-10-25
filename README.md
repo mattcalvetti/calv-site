@@ -35,3 +35,19 @@ Tapping the fingerprint triggers a real WebAuthn platform-authenticator prompt (
 - Timeline newest first (`TL` built from `TL_OLDEST` reversed, plus `voicesite` Oct 2026 on top).
 - Cosigns: "Cosigned" H1, rounded 1987-dialog cards, all avatars in original colour. Cosign breakdown moved into the "How cosigns work" card. Small cosign cards row removed (duplicated the embeds; Sachin "keep tabs on this guy" had no source and is deleted).
 - Tom: drop the real screenshot at `img/tom-whatsapp.png` and it replaces the text bubble automatically.
+
+## v11
+- **Thesis** is back, quiet, at the top of the Board. Three drafts in `THESES` (data.js); `THESIS_PICK` chooses which shows.
+- **Stacked windows.** "Connected to" opens a new window cascaded on the current one. The trail shows at the top, each window has a close box, closing returns to the one below, Esc closes the top one. Max 5 (oldest drops). On phones only the top window shows, with a "◂ Back" link.
+- **Timeline** rows invert on hover and show "open ▸". Hyperliquid dated Feb 2026.
+- **Yala photos** are 3 frames from the public Instagram post (Yala Peak summit, Apr 2025) saved in `img/yala-*.jpg`.
+
+## Videos: what Calv needs to provide
+Videos play in place on the site, with no link-out. For each video, send:
+1. **The original video file** (.mp4, H.264 video + AAC audio). Ideally 1080p, under ~50 MB. A Google Drive/Dropbox share link to the file is fine, and Grok Bot will download it and put it in `/video/`. GitHub won't take files over 100 MB, so bigger ones need compressing or a direct-file host such as Cloudflare R2, S3 or Bunny. YouTube, X, LinkedIn and Instagram links won't work here, because they are pages, not files.
+2. **The exact title**, plus one line on what it is.
+3. **Optional poster frame.** A still or timestamp you like. Otherwise Grok Bot picks a frame. Posters are shown 1-bit (black and white, high contrast) with a play button.
+4. **Rights.** Confirm the customer is happy for it to be on your personal site.
+
+Wiring: in data.js `VIDEOS`, set `src:"video/hio.mp4"` (or a direct `https://…/file.mp4`) and `poster:"video/hio.jpg"`. An empty `src` shows "video coming".
+Slots ready: HIO RPO mission, Pass Series A, Meridian launch BTS, Senescence.
