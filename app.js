@@ -83,16 +83,16 @@ document.addEventListener("click",e=>{const d=e.target.dataset;
 const closeMenus=()=>document.querySelectorAll(".menu").forEach(m=>m.classList.remove("open"));
 const VIEWS=["board","work","timeline","signals"];document.addEventListener("keydown",e=>{if(e.key==="Escape")document.querySelectorAll(".modal").forEach(m=>m.hidden=true)});
 function go(v){let drawer=null;if(v==="read"||v==="beyond"){show("#beyond");return}if(v==="cos")drawer="#cosTop",v="board";if(v==="interested")drawer="#board",v="board";
- VIEWS.forEach(x=>$("#"+x).hidden=x!==v);$(".thesis").hidden=v!=="board";$("#cosTop").hidden=v!=="board";
+ VIEWS.forEach(x=>$("#"+x).hidden=x!==v);$("#roleline").hidden=v!=="board";$("#cosTop").hidden=v!=="board";
  document.querySelectorAll(".vw").forEach(s=>s.classList.toggle("on",s.dataset.go===v));
  if(v==="board")draw();if(drawer)setTimeout(()=>{const d=$(drawer);if(d.tagName==="DETAILS")d.open=true;d.scrollIntoView({behavior:"smooth"})},30)}
-let ti=0;$("#cycle").onclick=e=>{e.preventDefault();ti=(ti+1)%THESES.length;$("#thesis").textContent=THESES[ti];e.target.textContent=`other options (${ti+1}/${THESES.length})`};
+// thesis parked (v10)
 // beyond work
 $("#gBeyond").innerHTML=BEYOND.map(g=>`<div class="win bw"><div class="tb"><span>${g.h}</span></div><div class="wb">${g.note?`<p class="small note">${g.note}</p>`:''}<ul>${g.items.map(x=>x.sub?`<li class="sub">${x.sub}</li>`:`<li>${x.u?`<a href="${x.u}" target="_blank" rel="noopener">${x.t}</a>`:`<b>${x.t}</b>`}${x.a?` <span class="muted">· ${x.a}</span>`:''}${x.chk?' <span class="dr">[check]</span>':''}</li>`).join("")}</ul></div></div>`).join("");
 // embeds: hide static fallback once the LinkedIn iframe loads; X blockquote is its own fallback
 document.querySelectorAll("iframe.li").forEach(f=>f.addEventListener("load",()=>{const fb=document.getElementById(f.dataset.fb);if(fb)fb.classList.add("hid")}));
 setTimeout(()=>document.querySelectorAll("iframe.li").forEach(f=>{const fb=document.getElementById(f.dataset.fb);if(fb&&!fb.classList.contains("hid")){f.remove()}}),8000);
 // signals
-SIGNALS.forEach(s=>{const el=document.createElement("div");el.className="win blk";el.innerHTML=`<div class="tb"><span>${s.src}</span></div><div class="wb"><span class="ph">PLACEHOLDER</span><h3>${s.title.replace("[PLACEHOLDER] ","")}</h3><div class="small">${s.why}</div></div>`;$("#gSig").append(el)});
+SIGNALS.forEach(s=>{const el=document.createElement("div");el.className="win blk sig";el.innerHTML=`<div class="tb"><span>${s.src}</span></div><div class="wb"><h3>${s.title}</h3><div class="small">${s.why}</div><div class="small muted sd">${s.d}${s.u?` · <a href="${s.u}" target="_blank" rel="noopener">view ↗</a>`:""}</div></div>`;$("#gSig").append(el)});
 if(location.hash.startsWith("#open")||sessionStorage.getItem("calv-unlocked"))unlock();
 const q=new URLSearchParams(location.search);if(q.get("about"))setTimeout(()=>show("#about"),80);if(q.get("v"))setTimeout(()=>go(q.get("v")),50);if(q.get("card"))setTimeout(()=>{q.get("card").split(",").forEach((c,i)=>open(T(c),i>0))},80);if(q.get("menu"))setTimeout(()=>$("#m"+q.get("menu")).classList.add("open"),80);

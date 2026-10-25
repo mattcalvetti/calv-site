@@ -118,3 +118,12 @@ a{color:#000}
 .wt.empty{border-style:dashed;box-shadow:none}.wt.empty h3{color:#555}
 @media(max-width:800px){#gBeyond{grid-template-columns:1fr}}
 .wa[hidden]{display:none}.cosrow{align-items:start}
+
+/* v10 */
+.role{max-width:1100px;margin:14px auto 4px;padding:0 12px;font-size:15px}
+#about .role{margin:0 0 10px;padding:0}
+.bcap{max-width:1100px;margin:0 auto 6px;padding:0 12px}
+.cosrow{align-items:stretch}.cosrow .eq{display:flex;flex-direction:column}.cosrow .eq .wb{flex:1}
+.cosrow .eq iframe.li{height:430px}
+.cosrow .dyl{grid-column:1/-1}
+.sig .sd{margin-top:8px}
