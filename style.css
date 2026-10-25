@@ -156,3 +156,29 @@ a{color:#000}
  .swin.top .wb{max-height:calc(100vh - 110px)}
  .photos{grid-template-columns:1fr 1fr}
 }
+
+/* v12 */
+.enterbtn{font:16px Silkscreen,monospace;background:#fff;border:2px solid #000;border-radius:8px;box-shadow:0 0 0 2px #fff,0 0 0 4px #000;padding:8px 34px;margin:14px 0 6px;cursor:pointer}
+.enterbtn:hover,.enterbtn:focus-visible{background:#000;color:#fff;outline:none}
+/* Board opening: a plain white dialog, no text on the dither */
+.dlg{max-width:620px;margin:28px auto 8px;border-radius:10px;box-shadow:4px 4px 0 #000;overflow:hidden}
+.dlg .tb{border-radius:8px 8px 0 0}.dlg .wb{padding:22px 28px 20px}
+.dlg .thesis{font:500 19px/1.55 -apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Helvetica,Arial,sans-serif;margin:0;padding:0;max-width:none;text-align:left}
+.dlg .role{font:14px/1.5 -apple-system,BlinkMacSystemFont,"Helvetica Neue",Helvetica,Arial,sans-serif;color:#333;margin:12px 0 0;padding:0;max-width:none}
+.dlg .hint{font:12px Silkscreen,monospace;border-top:1px solid #000;margin:16px 0 0;padding-top:10px}
+#cosTop .sec{background:#fff}
+/* cosign rows */
+.cosrow.r1{grid-template-columns:1fr 1fr}.cosrow.r2,.cosrow.r3{margin-top:0}
+.cosrow .dyl{grid-column:auto}.cosrow.r2{grid-template-columns:1fr}
+.cosrow.r1 .win,.cosrow.r3 .win{display:flex;flex-direction:column}.cosrow.r1 .wb,.cosrow.r3 .wb{flex:1}
+.waf{margin:0;border:2px solid #000;border-radius:10px;overflow:hidden;box-shadow:2px 2px 0 #000}.waf .wa{border:0;border-radius:0;width:100%;height:auto}
+/* signals lenses */
+.lensbar{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:14px 0 0}
+.lensbar .lb{font:11px Silkscreen;margin-right:4px}
+.lf{font:13px Chicago,Geneva,ui-monospace,monospace;background:#fff;border:2px solid #000;border-radius:12px;padding:2px 10px;cursor:pointer}
+.lf i{font:14px VT323;font-style:normal}.lf.on,.lf:hover{background:#000;color:#fff}
+.lcard{font-size:13px;margin-left:8px}
+.lens{display:inline-block;font:10px Silkscreen;border:1.5px solid #000;border-radius:9px;padding:1px 7px;margin-bottom:6px}
+.lens[data-lenscard]{cursor:pointer;background:#000;color:#fff}
+.sigl{border-top:2px solid #000;margin-top:12px;padding-top:8px}.sigl .rl{font-family:Silkscreen;font-size:12px;margin-bottom:6px}
+.sli{border:1.5px solid #000;padding:6px 8px;margin:0 0 6px;display:flex;flex-direction:column;gap:2px}.sli b{font-size:13px}

@@ -51,3 +51,9 @@ Videos play in place on the site, with no link-out. For each video, send:
 
 Wiring: in data.js `VIDEOS`, set `src:"video/hio.mp4"` (or a direct `https://…/file.mp4`) and `poster:"video/hio.jpg"`. An empty `src` shows "video coming".
 Slots ready: HIO RPO mission, Pass Series A, Meridian launch BTS, Senescence.
+
+## v12
+- Entry gate: the passkey/fingerprint gate is **parked**. Landing boots then shows a plain Enter button (Return works). The WebAuthn `passkey()` code stays in app.js, unwired, for a future hosted-auth swap (e.g. Google sign-in against an email allowlist via Clerk/Supabase/Cloudflare Access). Swap point: `unlock()`.
+- Thesis locked to THESES[0], shown in the white "Calv" dialog at the top of the Board. No text sits directly on the dithered background.
+- Cosigns: row 1 Tom (real WhatsApp screenshot, img/tom-whatsapp.png) beside Erik; row 2 Dylan; row 3 Sachin, Frank.
+- Signals carry a `lens`; `LENS_CARD` in data.js links a lens to its Interested-in card, which then lists "Signals through this lens".

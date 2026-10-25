@@ -4,7 +4,7 @@ const THESES=[
 "When everything is buildable, the hard part is choosing what is worth building and which darlings to kill. I'm interested in the few things that hold up long enough to become Lindy, if any do.",
 "Almost anything can be built now, so taste mostly comes down to what you choose to make and what you let go of. I want to work on the things that still matter in ten years.",
 "Thrive Eternal asks what lasts. With everything buildable, my answer so far is to build less, kill more darlings and keep the few things that stand up over time."];
-const THESIS_PICK=0;
+const THESIS_PICK=0; // v12: locked by Calv, only this one is shown
 const BLOCKS=[
 // Interested in (order chosen so threads never cross)
 {id:"scout",sec:"Things I'm interested in",title:"Talent scouting",body:"David Booth's framing of the talent scout as a craft. My first business, Immense Talent Group, was scouting too.",why:"I have always liked spotting people early.",when:"Ongoing",links:["cosign","ovitz"]},
@@ -88,18 +88,18 @@ harness:{t:"The harness chains skills together for idea generation and has a vie
 
 // Signals: my own posts from our team's #fds-signals channel, paraphrased. Links are the public posts I flagged.
 const SIGNALS=[
-{d:"4 Sep 2026",src:"OpenAI · X",u:"https://x.com/OpenAI/status/2095595741528125780",title:"OpenAI's GPT-6 Astra launch",why:"My favourite launch video in a while. It opens on the MIT “Put That There” archive clip, then shows the speed instead of telling you about it, with soft set dressing and handheld push-ins."},
-{d:"18 Sep 2026",src:"@seyong · X",u:"https://x.com/seyong/status/2100245041440559208",title:"Founder vlogs are coming back",why:"I think 3 to 5 minute vlogs are the next step after lo-fi statics and carousels, and we're still early to it."},
-{d:"23 Sep 2026",src:"Anthropic · X",u:"https://x.com/claudeai/status/2102435511222890900",title:"Who made Anthropic's Opus 5.5 video",why:"A few internal hires working with the agency Mother, which tells you how seriously the labs now take creative."},
-{d:"15 Sep 2026",src:"Runway · X",u:"https://x.com/runwayml/status/2099571028649271462",title:"Runway breaks down HORSE",why:"A step-by-step look at their workflow, useful for how we storyboard and work with editors."},
-{d:"3 Sep 2026",src:"Anthropic · X",u:"https://x.com/claudeai/status/2094848572143407483",title:"Anthropic's 5.1 marquee film",why:"Their signature match cut paired with a nature motif in the animation."},
-{d:"3 Sep 2026",src:"a16z · X",u:"https://x.com/a16z/status/2094806532999553311",title:"a16z reads the zeitgeist",why:"Built around an Adam22 podcast segment, it shows they know their audience and the stigma they're up against, in a distinct new media edit."},
-{d:"3 Sep 2026",src:"Runway · X",u:"https://x.com/runwayml/status/2092970864916693498",title:"Runway flexes on purpose",why:"Storyboarded to show off what AI video can do while staying aware that people are tired of AI video."},
-{d:"3 Sep 2026",src:"@alexabraham · X",u:"https://x.com/alexabraham/status/2094800998338531692",title:"A clean feature demo",why:"Elegant product demo that shows and never tells."},
-{d:"3 Sep 2026",src:"@IterIntellectus · X",u:"https://x.com/IterIntellectus/status/2094761595217850387",title:"Newsjacking a launch",why:"A demo and one static image dropped into a trending conversation as live commentary."},
-{d:"13 Oct 2026",src:"Notion · LinkedIn",u:"https://lnkd.in/p/gSFi2wSb",title:"Notion APAC's First Block",why:"An episodic series from Notion APAC, and I wanted to know how they approached set dressing and production."},
-{d:"11 Sep 2026",src:"LinkedIn",u:"https://lnkd.in/p/g9tBqXmJ",title:"LinkedIn's algorithm changes",why:"Seven points worth knowing for anyone posting for founders."},
-{d:"8 Oct 2026",src:"Observation",title:"Collab posts are getting buried",why:"It feels like the algorithm is quietly suppressing collab posts right now."}
+{d:"4 Sep 2026",src:"OpenAI · X",u:"https://x.com/OpenAI/status/2095595741528125780",lens:"Creative",title:"OpenAI's GPT-6 Astra launch",why:"My favourite launch video in a while. It opens on the MIT “Put That There” archive clip, then shows the speed instead of telling you about it, with soft set dressing and handheld push-ins."},
+{d:"18 Sep 2026",src:"@seyong · X",u:"https://x.com/seyong/status/2100245041440559208",lens:"Founder-led",title:"Founder vlogs are coming back",why:"I think 3 to 5 minute vlogs are the next step after lo-fi statics and carousels, and we're still early to it."},
+{d:"23 Sep 2026",src:"Anthropic · X",u:"https://x.com/claudeai/status/2102435511222890900",lens:"Talent scouting",title:"Who made Anthropic's Opus 5.5 video",why:"A few internal hires working with the agency Mother, which tells you how seriously the labs now take creative."},
+{d:"15 Sep 2026",src:"Runway · X",u:"https://x.com/runwayml/status/2099571028649271462",lens:"AI tooling",title:"Runway breaks down HORSE",why:"A step-by-step look at their workflow, useful for how we storyboard and work with editors."},
+{d:"3 Sep 2026",src:"Anthropic · X",u:"https://x.com/claudeai/status/2094848572143407483",lens:"Creative",title:"Anthropic's 5.1 marquee film",why:"Their signature match cut paired with a nature motif in the animation."},
+{d:"3 Sep 2026",src:"a16z · X",u:"https://x.com/a16z/status/2094806532999553311",lens:"New media",title:"a16z reads the zeitgeist",why:"Built around an Adam22 podcast segment, it shows they know their audience and the stigma they're up against, in a distinct new media edit."},
+{d:"3 Sep 2026",src:"Runway · X",u:"https://x.com/runwayml/status/2092970864916693498",lens:"AI tooling",title:"Runway flexes on purpose",why:"Storyboarded to show off what AI video can do while staying aware that people are tired of AI video."},
+{d:"3 Sep 2026",src:"@alexabraham · X",u:"https://x.com/alexabraham/status/2094800998338531692",lens:"Product storytelling",title:"A clean feature demo",why:"Elegant product demo that shows and never tells."},
+{d:"3 Sep 2026",src:"@IterIntellectus · X",u:"https://x.com/IterIntellectus/status/2094761595217850387",lens:"Timing",title:"Newsjacking a launch",why:"A demo and one static image dropped into a trending conversation as live commentary."},
+{d:"13 Oct 2026",src:"Notion · LinkedIn",u:"https://lnkd.in/p/gSFi2wSb",lens:"Episodic series",title:"Notion APAC's First Block",why:"An episodic series from Notion APAC, and I wanted to know how they approached set dressing and production."},
+{d:"11 Sep 2026",src:"LinkedIn",u:"https://lnkd.in/p/g9tBqXmJ",lens:"Algorithm",title:"LinkedIn's algorithm changes",why:"Seven points worth knowing for anyone posting for founders."},
+{d:"8 Oct 2026",src:"Observation",lens:"Algorithm",title:"Collab posts are getting buried",why:"It feels like the algorithm is quietly suppressing collab posts right now."}
 ];
 
 // Beyond work. [check] = couldn't confirm from the voice note.
@@ -135,3 +135,5 @@ const VIDEOS=[
 {t:"Senescence",k:"Short film · year 12",d:"My year 12 short film.",src:"",poster:""},{t:"More coming",k:"Slot",empty:1},{t:"More coming",k:"Slot",empty:1}];
 // Worked on view is canonical: same items and order as the Board's right column (videos have their own row above).
 const WORK=BLOCKS.filter(b=>b.sec==="Things I've worked on"&&b.id!=="videos").map(b=>b.id);
+// v12: lens -> Interested-in card it belongs to (only where one exists)
+const LENS_CARD={"Talent scouting":"scout","New media":"brent"};

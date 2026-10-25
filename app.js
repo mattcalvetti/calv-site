@@ -1,12 +1,13 @@
 const $=s=>document.querySelector(s);
 // boot
-const lines=["Kernel: specialised, not general.","Loading board… "+BLOCKS.length+" blocks","Allocating threads… ok","Inference path: one opinion","Awaiting authorised fingerprint_"];
+const lines=["Kernel: specialised, not general.","Loading board… "+BLOCKS.length+" blocks","Allocating threads… ok","Inference path: one opinion","Ready_"];
 const bl=$("#bootlog"),RM=matchMedia("(prefers-reduced-motion: reduce)").matches;
 if(RM)bl.textContent=lines.join("\n")+"\n";else{let i=0;const t=setInterval(()=>{bl.textContent+=lines[i++]+"\n";if(i>=lines.length)clearInterval(t)},280);}
+// v12: passkey gate is PARKED (not wired up). Landing shows a plain Enter button. Kept for a future hosted-auth swap; see README.
 // Unlock gate. NOTE: this is a LOCAL-DEVICE gate, NOT access control. There is no server,
 // so the WebAuthn assertion is never verified and anyone can bypass it ("Enter without passkey").
 // Real approved-email gating needs a hosted auth service (e.g. Clerk / Supabase / Auth0).
-const f=$("#finger"),ring=$("#ring"),nopk=$("#nopk"),fmsg=$("#fmsg"),KEY="calv-passkey-id";
+const KEY="calv-passkey-id";let ring={style:{}},nopk={},fmsg={};
 const rnd=n=>crypto.getRandomValues(new Uint8Array(n));
 const b64=u=>btoa(String.fromCharCode(...new Uint8Array(u))),unb64=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
 const fallback=m=>{fmsg.textContent=m||"";nopk.hidden=false};
@@ -28,7 +29,8 @@ async function passkey(){
  }catch(e){fallback(e&&e.name==="NotAllowedError"?"Cancelled.":"Couldn't use a passkey.")}
  finally{busy=false;ring.style.clipPath="inset(100% 0 0 0)"}
 }
-f.addEventListener("click",passkey);nopk.addEventListener("click",()=>unlock());
+const eb=$("#enter");if(eb){eb.addEventListener("click",()=>unlock());setTimeout(()=>eb.focus(),50)}
+document.addEventListener("keydown",e=>{if(!unlocked&&e.key==="Enter"){e.preventDefault();unlock()}});
 let unlocked=false;
 function unlock(){/* local gate only; see note above */if(unlocked)return;unlocked=true;try{sessionStorage.setItem("calv-unlocked","1")}catch(e){}const bt=$("#boot");if(bt)bt.remove();$("#desk").hidden=false;render();}
 
@@ -71,6 +73,7 @@ function content(b){const r=READS[b.id];
  ${r?`<div class="read"><div class="rl">Matt's read</div><p>${r.t}</p></div>`:''}
  <p class="why">↳ ${b.why}</p>${b.embed?`<div class="embed win"><div class="tb"><span>linkedin.com · Matt C.</span></div><div class="wb small"><p>“Dialled concept for a couple of reasons: 1. Co-signs are pretty scattered &amp; require baseline follower hygiene/knowing what to look for… 2. Question count introduces scarcity… 3. Second order effect, gives the folk at a16z the ability to see who’s got their talent spotting eye in/tastemaker sense.”</p><p class="muted">Reposting the a16z Cosign launch · Aug 2026</p></div></div>`:''}
  ${b.imgs&&b.imgs.length?`<div class="photos">${b.imgs.map(u=>`<figure class="pf"><img src="${u}" alt="${b.title}" loading="lazy"></figure>`).join("")}</div>${b.imgCap?`<p class="small muted">${b.imgCap}</p>`:''}`:''}
+${(()=>{const l=Object.keys(LENS_CARD).find(k=>LENS_CARD[k]===b.id);const ss=l?SIGNALS.filter(s=>s.lens===l):[];return ss.length?`<div class="sigl"><div class="rl">Signals through this lens</div>${ss.map(s=>`<div class="sli"><b>${s.title}</b><span class="small">${s.why}</span>${s.u?`<a class="small" href="${s.u}" target="_blank" rel="noopener">view ↗</a>`:''}</div>`).join('')}<a href="#" class="small" data-siglens="${l}">See it in Signals ▸</a></div>`:''})()}
  ${b.url?`<p><a href="${b.url}" ${b.url.startsWith("?")?'':'target="_blank" rel="noopener"'}>${b.urlLab||"Open original ↗"}</a></p>`:''}
  ${strip?`<div class="conn"><div class="rl">Connected to · opens a new window</div><div class="strip">${strip}</div></div>`:''}
  ${b.when?`<p class="small muted">When: ${b.when}</p>`:""}`}
@@ -102,7 +105,7 @@ document.addEventListener("click",e=>{const d=e.target.dataset;
 const closeMenus=()=>document.querySelectorAll(".menu").forEach(m=>m.classList.remove("open"));
 const VIEWS=["board","work","timeline","signals"];document.addEventListener("keydown",e=>{if(e.key==="Escape"){if(STACK.length)pop(STACK.length-1);else document.querySelectorAll(".modal").forEach(m=>m.hidden=true)}});
 function go(v){let drawer=null;if(v==="read"||v==="beyond"){show("#beyond");return}if(v==="cos")drawer="#cosTop",v="board";if(v==="interested")drawer="#board",v="board";
- VIEWS.forEach(x=>$("#"+x).hidden=x!==v);$("#roleline").hidden=v!=="board";$("#thesis").hidden=v!=="board";$("#cosTop").hidden=v!=="board";
+ VIEWS.forEach(x=>$("#"+x).hidden=x!==v);$("#intro").hidden=v!=="board";$("#cosTop").hidden=v!=="board";
  document.querySelectorAll(".vw").forEach(s=>s.classList.toggle("on",s.dataset.go===v));
  if(v==="board")draw();if(drawer)setTimeout(()=>{const d=$(drawer);if(d.tagName==="DETAILS")d.open=true;d.scrollIntoView({behavior:"smooth"})},30)}
 // thesis (v11)
@@ -113,6 +116,13 @@ $("#gBeyond").innerHTML=BEYOND.map(g=>`<div class="win bw"><div class="tb"><span
 document.querySelectorAll("iframe.li").forEach(f=>f.addEventListener("load",()=>{const fb=document.getElementById(f.dataset.fb);if(fb)fb.classList.add("hid")}));
 setTimeout(()=>document.querySelectorAll("iframe.li").forEach(f=>{const fb=document.getElementById(f.dataset.fb);if(fb&&!fb.classList.contains("hid")){f.remove()}}),8000);
 // signals
-SIGNALS.forEach(s=>{const el=document.createElement("div");el.className="win blk sig";el.innerHTML=`<div class="tb"><span>${s.src}</span></div><div class="wb"><h3>${s.title}</h3><div class="small">${s.why}</div><div class="small muted sd">${s.d}${s.u?` · <a href="${s.u}" target="_blank" rel="noopener">view ↗</a>`:""}</div></div>`;$("#gSig").append(el)});
+const LENSES=[...new Set(SIGNALS.map(s=>s.lens))];let LENS="";
+function sigCard(s,mini){return `<div class="win ${mini?'msig':'blk sig'}"><div class="tb"><span>${s.src}</span></div><div class="wb"><span class="lens" ${LENS_CARD[s.lens]?`data-lenscard="${LENS_CARD[s.lens]}"`:''}>${s.lens}</span><h3>${s.title}</h3><div class="small">${s.why}</div><div class="small muted sd">${s.d}${s.u?` · <a href="${s.u}" target="_blank" rel="noopener">view ↗</a>`:""}</div></div></div>`}
+function renderSig(){$("#lensbar").innerHTML=`<span class="lb">Lens</span>`+["",...LENSES].map(l=>`<button type="button" class="lf${l===LENS?' on':''}" data-lens="${l}">${l||"All"} <i>${l?SIGNALS.filter(s=>s.lens===l).length:SIGNALS.length}</i></button>`).join("")+(LENS&&LENS_CARD[LENS]?`<a href="#" class="lcard" data-open="${LENS_CARD[LENS]}">Open the ${T(LENS_CARD[LENS]).title} card ▸</a>`:'');
+ $("#gSig").innerHTML=SIGNALS.filter(s=>!LENS||s.lens===LENS).map(s=>sigCard(s)).join("")}
+renderSig();
+document.addEventListener("click",e=>{const b=e.target.closest("[data-lens]");if(b){LENS=b.dataset.lens;renderSig();return}
+ const c=e.target.closest("[data-lenscard]");if(c){e.preventDefault();open(T(c.dataset.lenscard))}
+ const sl=e.target.closest("[data-siglens]");if(sl){e.preventDefault();LENS=sl.dataset.siglens;STACK=[];renderStack();go("signals");renderSig()}});
 if(location.hash.startsWith("#open")||sessionStorage.getItem("calv-unlocked"))unlock();
 const q=new URLSearchParams(location.search);if(q.get("about"))setTimeout(()=>show("#about"),80);if(q.get("v"))setTimeout(()=>go(q.get("v")),50);if(q.get("card"))setTimeout(()=>{q.get("card").split(",").forEach((c,i)=>open(T(c),i>0))},80);if(q.get("menu"))setTimeout(()=>$("#m"+q.get("menu")).classList.add("open"),80);
