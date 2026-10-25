@@ -230,3 +230,4 @@ a{color:#000}
 .flow li:before{content:counter(f);font:11px Silkscreen}.flow b{font-size:12px}
 .plinks{margin-top:8px}
 @media(max-width:800px){.plat .wb{grid-template-columns:1fr}.plat .pimg{border-right:0;border-bottom:2px solid #000}}
+.plat .pimg img{object-fit:contain;object-position:center}.plat .pimg{display:flex;align-items:center}
