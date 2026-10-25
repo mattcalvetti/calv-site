@@ -33,7 +33,7 @@ async function passkey(){
 const eb=$("#enter");if(eb){eb.addEventListener("click",()=>unlock());setTimeout(()=>eb.focus(),50)}
 document.addEventListener("keydown",e=>{if(!unlocked&&e.key==="Enter"){e.preventDefault();unlock()}});
 let unlocked=false;
-function unlock(){/* local gate only; see note above */if(unlocked)return;unlocked=true;try{sessionStorage.setItem("calv-unlocked","1")}catch(e){}const bt=$("#boot");if(bt)bt.remove();$("#desk").hidden=false;render();}
+function unlock(){/* local gate only; see note above */if(unlocked)return;unlocked=true;try{sessionStorage.setItem("calv-unlocked","1")}catch(e){}const bt=$("#boot");if(bt)bt.remove();$("#desk").hidden=false;render();if(!new URLSearchParams(location.search).get("v")&&!new URLSearchParams(location.search).get("card"))setTimeout(()=>go("work"),0);}
 
 // board
 const DZ='<svg width="0" height="0" style="position:absolute"><defs><pattern id="dz" width="4" height="4" patternUnits="userSpaceOnUse"><rect width="4" height="4" fill="#fff"/><rect width="1" height="1"/><rect x="2" y="2" width="1" height="1"/></pattern></defs></svg>';
@@ -50,7 +50,9 @@ function render(){const L=$("#colL"),R=$("#colR");
  BLOCKS.forEach(b=>{if(b.sec==="Things I'm interested in")L.append(card(b));else if(b.sec==="Things I've worked on")R.append(card(b));
 });
  const vt=v=>`<div class="win wt vtile${v.spot?' spot':''}"><div class="tb"><span>${v.c}</span></div><div class="wb">${vplayer(v)}<div class="vt"><h3>${v.t}</h3><div class="vmeta">${v.c} · ${v.date}</div><div class="small v1">${v.d}</div>${(v.x||v.m||v.u)?`<details class="vmore"><summary>more</summary>${v.x?`<p class="small">${v.x}</p>`:''}<p class="small muted">${v.m?v.m+' on LinkedIn. ':''}${v.u?`<a href="${v.u}" target="_blank" rel="noopener">View on LinkedIn ↗</a>`:''}</p></details>`:''}<a href="#" class="small onb" data-board="videos">On the Board ▸</a></div></div></div>`;
- $("#gVid").innerHTML=DZ+`<div class="spotw">${VIDEOS.filter(v=>v.spot).map(vt).join("")}</div><div class="wgrid">${VIDEOS.filter(v=>!v.spot).map(vt).join("")}</div>`;
+ $("#gHeo").innerHTML=DZ+`<div class="spotw">${VIDEOS.filter(v=>v.spot).map(vt).join("")}</div>`;
+ $("#gVid").innerHTML=`<div class="wgrid">${VIDEOS.filter(v=>!v.spot).map(vt).join("")}</div>`;
+ $("#gSA").innerHTML=SA.map(s=>`<div class="win wt vtile satile"><div class="tb"><span>${s.c}</span></div><div class="wb"><div class="frame yt" data-yt="${s.yt}" role="button" tabindex="0" aria-label="Play ${s.t}"><img class="poster" src="https://i.ytimg.com/vi/${s.yt}/hqdefault.jpg" alt="" loading="lazy"><span class="play" aria-hidden="true"><svg viewBox="0 0 40 40" width="44" height="44"><rect x="1" y="1" width="38" height="38" rx="6" fill="#fff" stroke="#000" stroke-width="2"/><polygon points="15,11 15,29 29,20" fill="#000"/></svg></span></div><div class="vt"><h3>${s.c}</h3><div class="vmeta">${s.date} · ${s.v} views on YouTube${s.xv?` · ${s.xv} on <a href="${s.x}" target="_blank" rel="noopener">X</a>`:''}</div><div class="small v1">${s.t}</div></div></div></div>`).join("");
  $("#gPlat").innerHTML=`<div class="win plat"><div class="tb"><span>kindling.team</span></div><div class="wb"><a class="pimg" href="${PLATFORM.u}" target="_blank" rel="noopener"><img src="${PLATFORM.img}" alt="The Kindling product home screen" loading="lazy"></a><div class="ptx"><h3>The Kindling platform</h3><div class="vmeta">Kindling · launching soon</div><p class="small">${PLATFORM.line}</p><ol class="flow">${PLATFORM.flow.map(([k,v])=>`<li><b>${k}</b><span>${v}</span></li>`).join("")}</ol><p class="small plinks"><a href="${PLATFORM.u}" target="_blank" rel="noopener">Visit kindling.team ↗</a> · <a href="#" data-board="platform,harness,agentsw">On the Board ▸</a></p></div></div></div>`;
  $("#gProg").innerHTML=INPROG.map(p=>`<div class="win wt prog"><div class="tb"><span>${p.k}</span></div><div class="wb">${p.img?`<figure class="mood"><img src="${p.img}" alt="${p.t} moodboard" loading="lazy"><figcaption>${p.cap}</figcaption></figure>`:`<div class="frame blank"><span class="fl">in development</span></div>`}<h3>${p.t}</h3><div class="small">${p.d}</div></div></div>`).join("");
 
@@ -133,3 +135,7 @@ function showOnBoard(ids){ids=[].concat(ids);STACK=[];renderStack();go("board");
   ids.forEach(id=>{const c=$("#b-"+id);if(c)c.classList.add("pulse")});focus(ids[0],1);
   setTimeout(()=>{ids.forEach(id=>{const c=$("#b-"+id);if(c)c.classList.remove("pulse")});focus(ids[0],0)},2600)},60)}
 document.addEventListener("click",e=>{const l=e.target.closest("[data-board]");if(l){e.preventDefault();e.stopPropagation();showOnBoard(l.dataset.board.split(","))}},true);
+
+function playYT(fr){const f=document.createElement("iframe");f.src="https://www.youtube-nocookie.com/embed/"+fr.dataset.yt+"?autoplay=1&rel=0";f.allow="autoplay; encrypted-media; picture-in-picture; fullscreen";f.allowFullscreen=true;f.title="YouTube video";fr.innerHTML="";fr.classList.add("playing");fr.append(f)}
+document.addEventListener("click",e=>{const fr=e.target.closest(".frame.yt:not(.playing)");if(fr)playYT(fr)});
+document.addEventListener("keydown",e=>{const fr=e.target.closest&&e.target.closest(".frame.yt:not(.playing)");if(fr&&(e.key==="Enter"||e.key===" ")){e.preventDefault();playYT(fr)}});

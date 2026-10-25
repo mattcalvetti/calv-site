@@ -30,6 +30,7 @@ const BLOCKS=[
 {id:"fds",sec:"Things I've worked on",title:"FDS at Kindling",body:"Founding team at Kindling and head of FDS, leading a team of soon to be six strategists. FDS runs organic content for B2B tech founders.",why:"It is where taste has to become something a team can repeat.",when:"Since joining Kindling",links:["harness","distil","videos"]},
 {id:"platform",sec:"Things I've worked on",title:"The Kindling platform",body:"Kindling's marketing brain and execution system, launching soon at kindling.team. Over the last year I built the product with our co-founders and founding engineer. I started as a strategist and moved into steering product, from the organic strategy it runs on through to briefs, ideas, copy and tone of voice.",why:"It takes what a good strategist does and makes it repeatable for every customer.",when:"2025–2026",url:"https://kindling.team/product",urlLab:"Visit kindling.team ↗",links:["harness","distil","agentsw","fds","videos"]},
 {id:"videos",sec:"Things I've worked on",title:"Customer videos",body:"Videos I've run for Kindling customers through the Kindling marketplace, including HEO's first rendezvous mission, Haast's Series A and flagship agents, Haast's team film and building in public with Meridian.",url:"?v=work",urlLab:"Open the Worked on view ▸",why:"The work people actually see.",when:"Kindling",links:["sachadam"]},
+{id:"saep",sec:"Things I've worked on",title:"Sachin & Adam episodes",body:"Episodes from our media arm on PsiQuantum, Fortell, Physical Intelligence, Baseten, Chai Discovery and Base Power. I was an internal sounding board alongside Tom, giving feedback on drafts.",why:"Watching how a long form story about a frontier company gets made.",when:"2026",url:"?v=work",urlLab:"See them in Worked on ▸",links:["lps","dylan","brent","sachadam"]},
 {id:"senescence",sec:"Things I've worked on",title:"Senescence",body:"An early short film of mine, named for the Latin word for the slow decline that comes with age.",why:"I was telling stories with a camera well before it was my job.",when:"",ph:1,pend:"Video link pending",links:["email"]},
 {id:"yala",sec:"Things I've worked on",title:"Yala Peak, Himalayas",body:"Yala Peak (5,600m) in the Himalayas, 11 days on foot, then time in Kathmandu, a city that felt soulful.",why:"I wanted some friction and came back with room to think.",when:"Apr 2025",imgs:["img/yala-1.jpg","img/yala-2.jpg","img/yala-3.jpg"],imgCap:"From my Instagram, April 2025",links:["friction","senescence"]},
 {id:"harness",sec:"Things I've worked on",title:"The harness",body:"Chained skills that work like a master prompt for idea generation, plus templates for organic strategy.",why:"It lets the whole team use instincts that used to sit with one person.",when:"Kindling",links:["agentsw"]},
@@ -50,7 +51,7 @@ const BLOCKS=[
 {id:"sachadam",sec:"Who's cosigned me",title:"Sachin & Adam",body:"An existing relationship around their documentary series on emerging tech.",why:"I am a sounding board to them alongside Tom.",when:"2026",ph:1,links:[]}
 ];
 // Threads: interest -> work it shaped. Order of both columns keeps these crossing-free.
-const THREADS=[["agentsi","platform","agents in the product"],["special","platform","built for one job"],["agentsi","email","agents in the pitch"],["friction","email","Yala, in the email"],["scout","agency","reading talent"],
+const THREADS=[["lps","saep","tech media"],["dylan","saep","new media"],["agentsi","platform","agents in the product"],["special","platform","built for one job"],["agentsi","email","agents in the pitch"],["friction","email","Yala, in the email"],["scout","agency","reading talent"],
 ["scout","itg","my first business"],["scout","email","backed Kindling early"],["scout","hyper","backing the founder"],
 ["conviction","hyper","a conviction bet"],["conviction","cospost","who has the eye"],
 ["cosign","cospost","the mechanic, early"],["cosign","article","the essay's subject"],
@@ -127,7 +128,7 @@ const BEYOND=[
  {t:"Sound healing"},{t:"Going from digital back to analog",a:"agency over what we consume"},{t:"Online identity"},{t:"Jazz"},{t:"Wine"},{t:"Community, and things going local"},{t:"Hardware"},{t:"Financial markets"}]}
 ];
 // Timeline order (oldest → newest). Entries with no "when" render without a date label.
-const TL_OLDEST=["senescence","signing","london","itg","moon","web3","degods","frank","yala","agency","email","kindling","fds","fdssig","distil","harness","hyper","agentsw","platform","videos","sachpost","cospost","dylanx","dylan","brent","sachadam","erik","article"];
+const TL_OLDEST=["senescence","signing","london","itg","moon","web3","degods","frank","yala","agency","email","kindling","fds","fdssig","distil","harness","hyper","agentsw","platform","videos","sachpost","cospost","dylanx","dylan","brent","sachadam","saep","erik","article"];
 // Timeline renders newest first.
 const TL=["voicesite",...TL_OLDEST.slice().reverse()];
 // v13: Customer videos, only work Calv made. li = LinkedIn embed URN (plays in situ), u = clean post URL, src = self-hosted mp4.
@@ -159,3 +160,13 @@ const PLATFORM={img:"img/kindling-product.jpg?v=22",u:"https://kindling.team/pro
  ["Harness","Ideas run through the harness of chained skills our strategists use."],
  ["Copy","Copywriting that comes out of the same flow."],
  ["Tone of voice","Ongoing work to make the copy sound more like each founder."]]};
+
+// v25: Sachin & Adam episodes. Calv was an internal sounding board alongside Tom, giving feedback on drafts. No production credit.
+// YouTube views are the rounded public counts shown on the channel, read 25 Oct 2026. X views are public impression counts, read 25 Oct 2026.
+const SA=[
+{c:"PsiQuantum",yt:"2jshwfW6b4Q",t:"Why NVIDIA & BlackRock Are Betting $2.3B on This Startup",date:"Jul 2026",v:"288K",x:"https://x.com/Sachin_and_Adam/status/2077151149153812734",xv:"9.5K"},
+{c:"Fortell",yt:"rCJhlCZVTZQ",t:"Why Billionaires & Celebrities Are Lining Up for This $700M AI Startup",date:"Aug 2026",v:"230K",x:"https://x.com/Sachin_and_Adam/status/2087524509276401802",xv:"251K"},
+{c:"Physical Intelligence",yt:"b8BDUa-xbyA",t:"Inside the $5.6B Startup Building Robot Brains",date:"Jan 2026",v:"205K"},
+{c:"Baseten",yt:"LILsOOG0Z1o",t:"The Smartest Team in AI You've Never Heard Of",date:"Oct 2026",v:"140K",x:"https://x.com/Sachin_and_Adam/status/2105784970090578355",xv:"109K"},
+{c:"Chai Discovery",yt:"3-12R_POwi4",t:"Inside The $4B Startup Where AI Designs Drugs in 24 Hours",date:"Jul 2026",v:"50K",x:"https://x.com/Sachin_and_Adam/status/2082224589493723456",xv:"98K"},
+{c:"Base Power",yt:"_fTPLRf1cnA",t:"How A SpaceX Engineer & Zach Dell Built Their $4B Empire",date:"May 2026",v:"44K",x:"https://x.com/Sachin_and_Adam/status/2055045494880034883",xv:"68K"}];
