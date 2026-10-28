@@ -11,7 +11,7 @@
   --space-lg: 1.5rem;
   --space-section: clamp(1.5rem, 1rem + 2vw, 3rem);
   --gutter: clamp(.75rem, .5rem + 1vw, 1.5rem);
-  --page-end-space: clamp(5rem, 4rem + 5vw, 9rem);
+  --page-end-space: var(--space-section);
   --page-width: 73.75rem;
   --rule: 2px solid var(--ink);
   --window-shadow: 3px 3px 0 var(--ink);
