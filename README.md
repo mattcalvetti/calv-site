@@ -1,59 +1,47 @@
-# Calv — one opinion, demonstrated (v0 draft)
-Static site, no build step. Run: `python3 -m http.server 8765` then open http://localhost:8765 (add `#open` to skip the boot screen).
-Files: index.html, style.css, data.js (all content — edit blocks here), app.js.
-## Auth (stub)
-Press-and-hold fingerprint is UI only. Plan: hosted auth (Clerk or Supabase) with passkeys (WebAuthn: Touch ID/Face ID) for allowlisted emails, magic-link first then passkey enrolment. Replace `unlock()` in app.js. GitHub Pages can't enforce access alone. Needs Vercel/Netlify or similar.
-## Placeholders
-All blocks flagged `ph:1` in data.js.
-## Thesis = PLACEHOLDER
-The shown thesis ("Founder-led storytelling. Backing people early.") is a placeholder; Calv found earlier drafts cringe. Alternatives live in `THESES` in data.js ([0] is shown).
-## Embeds
-X posts use the official widgets.js blockquote (blockquote text is the static fallback). LinkedIn uses the official /embed/feed/update iframe with a static fallback card shown if it doesn't load within 8s.
-## Review
-See THREADS.md to sense-check each interest → work link.
+# Calv
 
-## v6
-Reading pane (books + FDS required reading from the Notion FDS Team Memo, public links only) lives in Beyond work. Timeline order is `TL` in data.js; entries with an empty `when` show no date. See HIG.md for what was taken from the 1987 Apple HIG.
+Static portfolio with a Mac-inspired interface. No build step or dependencies.
 
-## Reads written by Grok Bot for Calv to approve
-Every "Matt's read" was drafted by Grok Bot in Calv's voice from his voice notes, and none has been approved yet:
-scout, conviction, thrive, fdssig, cospost, cosign, lps, dylan, brent, dylanx, ovitz, friction, special, email, hyper, distil, article, fds, videos, senescence, yala, agentsi, agentsw, harness.
-The card "why" lines, the board intro, the About text and the Bullish-on note were also rewritten by Grok Bot (v8).
+Run `python3 -m http.server 8765` and open http://localhost:8765.
 
-Still to confirm: 1000x podcast hosts (Avi Felman & Jonah Van Bourg), and whether Overheard can be described as serving Kindling's customers.
-Cosign X posts are static cards (avatars in img/, pulled from public X profiles) so they render identically everywhere; LinkedIn posts use LinkedIn's iframe with a text fallback.
+## Navigation
 
-## Unlock gate (passkey)
-Tapping the fingerprint triggers a real WebAuthn platform-authenticator prompt (Touch ID / Face ID / Windows Hello). First visit creates a passkey for this hostname and stores its credential id in localStorage; later visits ask for it. If passkeys are unavailable, cancelled, or error, an "Enter without passkey" link appears.
+- **Calv dropdown**: Introduction, Timeline, Cosigned, Beyond work (including Reading), then Email, X and LinkedIn.
+- **Work dropdown**: Overview (default landing), Sachin & Adam, Films, Kindling platform, In progress and Ideas. Work items jump to anchored sections of the same page. The active dropdown item and URL follow scrolling using history replacement, so scrolling does not fill browser history.
+- **Thinking dropdown**: Board (ideas connected to work) and Signals.
 
-**This is a local-device gate, not access control.** There is no backend, so nothing is verified server-side and anyone can bypass it. Restricting the site to approved emails requires a hosted auth service (e.g. Clerk, Supabase Auth, Auth0, or Cloudflare Access).
+Open menus switch on mouse hover between titles; closed menus stay closed until clicked. All navigation lives in the compact menu bar. There is no separate About menu or in-page navigation row.
 
-## v9
-- New **Worked on** view (menu bar + Calv menu). `VIDEOS` and `WORK` in data.js. Video thumbnails are 1-bit placeholder frames.
-- **Titles dictated by voice, spellings to confirm:** "HIO RPO mission" (HIO? RPO?), "Pass Series A announcement" (dictated as "past series A"; is the company Pass?), "Behind the scenes of the Meridian launch" (Meridian?).
-- Beyond work is a Calv-menu window. Instagram removed everywhere.
-- Timeline newest first (`TL` built from `TL_OLDEST` reversed, plus `voicesite` Oct 2026 on top).
-- Cosigns: "Cosigned" H1, rounded 1987-dialog cards, all avatars in original colour. Cosign breakdown moved into the "How cosigns work" card. Small cosign cards row removed (duplicated the embeds; Sachin "keep tabs on this guy" had no source and is deleted).
-- Tom: drop the real screenshot at `img/tom-whatsapp.png` and it replaces the text bubble automatically.
+`site-header.js` defines the shared dropdown contents on both pages. `navigation.js` owns routes, active states and section visibility. URLs use `?v=work`, `?v=board`, `?v=signals`, `?v=about`, `?v=timeline`, `?v=cos`, or `?v=beyond`. Browser back/forward restores the selected view. Legacy `interested`, `read`, `?about=1` and `?card=id` links still resolve; unknown views fall back to Work.
 
-## v11
-- **Thesis** is back, quiet, at the top of the Board. Three drafts in `THESES` (data.js); `THESIS_PICK` chooses which shows.
-- **Stacked windows.** "Connected to" opens a new window cascaded on the current one. The trail shows at the top, each window has a close box, closing returns to the one below, Esc closes the top one. Max 5 (oldest drops). On phones only the top window shows, with a "◂ Back" link.
-- **Timeline** rows invert on hover and show "open ▸". Hyperliquid dated Feb 2026.
-- **Yala photos** are 3 frames from the public Instagram post (Yala Peak summit, Apr 2025) saved in `img/yala-*.jpg`.
+## Entry and authentication
 
-## Videos: what Calv needs to provide
-Videos play in place on the site, with no link-out. For each video, send:
-1. **The original video file** (.mp4, H.264 video + AAC audio). Ideally 1080p, under ~50 MB. A Google Drive/Dropbox share link to the file is fine, and Grok Bot will download it and put it in `/video/`. GitHub won't take files over 100 MB, so bigger ones need compressing or a direct-file host such as Cloudflare R2, S3 or Bunny. YouTube, X, LinkedIn and Instagram links won't work here, because they are pages, not files.
-2. **The exact title**, plus one line on what it is.
-3. **Optional poster frame.** A still or timestamp you like. Otherwise Grok Bot picks a frame. Posters are shown 1-bit (black and white, high contrast) with a play button.
-4. **Rights.** Confirm the customer is happy for it to be on your personal site.
+The startup log and plain Enter button are retained. Return also enters. A session remembers entry; `#open` skips startup for direct previews. Enter respects a linked destination.
 
-Wiring: in data.js `VIDEOS`, set `src:"video/hio.mp4"` (or a direct `https://…/file.mp4`) and `poster:"video/hio.jpg"`. An empty `src` shows "video coming".
-Slots ready: HIO RPO mission, Pass Series A, Meridian launch BTS, Senescence.
+The original WebAuthn prototype and its caveats are preserved in **auth-draft.js**, intentionally not loaded. It uses the original placeholder UI bindings and calls `unlock()`; it is a reference for future integration, not a drop-in production gate. Real access control needs hosted authentication and server-side verification. The live site remains public static content.
 
-## v12
-- Entry gate: the passkey/fingerprint gate is **parked**. Landing boots then shows a plain Enter button (Return works). The WebAuthn `passkey()` code stays in app.js, unwired, for a future hosted-auth swap (e.g. Google sign-in against an email allowlist via Clerk/Supabase/Cloudflare Access). Swap point: `unlock()`.
-- Thesis locked to THESES[0], shown in the white "Calv" dialog at the top of the Board. No text sits directly on the dithered background.
-- Cosigns: row 1 Tom (real WhatsApp screenshot, img/tom-whatsapp.png) beside Erik; row 2 Dylan; row 3 Sachin, Frank.
-- Signals carry a `lens`; `LENS_CARD` in data.js links a lens to its Interested-in card, which then lists "Signals through this lens".
+## Files and ownership
+
+- `index.html`: shell and static content sections.
+- `data.js`: cards, projects, signals, readings and connections.
+- `app.js`: rendering, startup, media and detail-reader behaviour.
+- `navigation.js`: routing and navigation configuration.
+- `site-header.js`: menu definitions and dismissal behaviour for the native dropdowns, shared with the article.
+- `foundations.css`: shared tokens, baseline rules, compact header and dropdowns.
+- `style.css`: portfolio components and responsive layouts.
+- `article.html` / `article.css`: long-form article, using the shared header and foundations.
+- `auth-draft.js`: unloaded authentication prototype.
+
+Cards open one native dialog. Connected cards replace its contents and retain a back trail (up to five cards). Escape or Close exits the reader; native dialog behaviour contains keyboard focus and restores it on close.
+
+## CSS approach
+
+Apply relevant [Good CSS](https://good-css.com/) practices incrementally: shared spacing tokens, bounded fluid gutters and headings, intrinsic grids, logical properties, stable scrollbar space, and defensive text wrapping. Preserve bitmap accents, monochrome framing and the original startup experience. Component-specific layout stays in `style.css`; shared values belong in `foundations.css`.
+
+## Content and history
+
+Existing content and draft claims have not been editorially approved by this refactor. `ph:1` marks placeholders. Earlier version notes, content verification questions, video handoff guidance and authentication history are preserved in [development-history.md](docs/development-history.md). Connection rationale remains in [THREADS.md](THREADS.md); design principles are in [HIG.md](HIG.md).
+
+## Manual verification
+
+Check startup with Enter and Return; all seven section views; active nav state; back/forward and reload; legacy and invalid URLs; detail opening, related-card Back and Escape; Work-to-Board links; video playback; the article return link; and narrow layouts at 375px. Third-party embeds depend on their hosts and network access.
