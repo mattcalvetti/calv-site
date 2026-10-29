@@ -1,7 +1,7 @@
 // Every block: id, sec, title, body, why (ties to thesis), when (timeline), links (thread ids), ph (placeholder?)
 // Thesis (v11): THESIS_PICK is shown, quietly, at the top of the Board. All three drafted by Grok Bot for Calv to approve.
 const THESES=[
-"When everything is buildable, the hard part is choosing what is worth building and which darlings to kill. I'm interested in the few things that hold up long enough to become Lindy, if any do.",
+"When everything is buildable, the hard part is choosing what is worth building and which darlings to kill. I'm interested in the few things that hold up long enough to become Lindy.",
 "Almost anything can be built now, so taste mostly comes down to what you choose to make and what you let go of. I want to work on the things that still matter in ten years.",
 "Thrive Eternal asks what lasts. With everything buildable, my answer so far is to build less, kill more darlings and keep the few things that stand up over time."];
 const THESIS_PICK=0; // v12: locked by Calv, only this one is shown
