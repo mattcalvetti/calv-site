@@ -109,7 +109,7 @@ const SIGNALS=[
 // Beyond work. [check] = couldn't confirm from the voice note.
 const BEYOND=[
 {h:"Personal interests",note:"Things I got into early, or just love doing.",items:[
- {t:"Crypto",a:"came in as a trader, then NFTs and web3 from 2021 to 2023, a content contributor to DeGods in 2023, and a Hyperliquid position at $30 in Feb 2026"},
+ {t:"Crypto",a:"a contributor to DeGods in 2023"},
  {t:"New media",a:"a sounding board to Sachin & Adam, and reading a16z and Erik Torenberg on where it's going"},
  {t:"Adventures",a:"Yala Peak (5,600m) in Nepal, 11 days on foot, Apr 2025"},
  {t:"Hyrox"}]},
