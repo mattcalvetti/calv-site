@@ -44,6 +44,7 @@ function go(view, {historyMode = "push", moveFocus = true, anchor = ""} = {}) {
  document.getElementById("page-title").textContent = section.label;
  document.getElementById("page-description").textContent = section.description;
  document.getElementById("page-description").hidden = !section.description;
+ document.querySelector(".page-heading").hidden = section === SECTIONS.about && view !== "about";
  document.title = `${section.label}${section.views.length > 1 ? " · " + route.label : ""} · Matt Calvetti`;
  const changed = currentView !== view;
  currentView = view;

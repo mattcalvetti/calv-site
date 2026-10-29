@@ -270,3 +270,4 @@ a{color:#000}
 #gProg .prog .lpanel img{height:30px!important;max-height:30px!important;max-width:72%!important;width:auto!important}
 .vtile .vt .small,.vtile .vt .vmore{margin-left:0;margin-right:0}
 #work p.vcav{display:block;max-width:640px;margin:-6px 0 14px;padding:4px 10px;border:0;border-left:2px solid #000;background:#fff;color:#555;font-size:12px;line-height:1.45}
+.page-heading[hidden]{display:none!important}
