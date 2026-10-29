@@ -1,12 +1,12 @@
 // Shared compact menu bar for the portfolio and article.
-const WORK_ANCHORS = ["work-episodes", "work-films", "work-platform", "work-progress"];
+const WORK_ANCHORS = ["work-episodes", "work-platform", "work-films", "work-progress"];
 const HEADER_MENUS = [
  {label:"◰ Calv", section:"about", items:[
   ["Introduction", "about"], ["Timeline", "timeline"], ["Cosigned", "cos"], ["Beyond work", "beyond"]
  ]},
  {label:"Work", section:"work", items:[
-  ["Overview", "work"], ["Sachin & Adam", "work", "work-episodes"], ["Films", "work", "work-films"],
-  ["Kindling platform", "work", "work-platform"], ["In progress", "work", "work-progress"]
+  ["Overview", "work"], ["Sachin & Adam", "work", "work-episodes"], ["Kindling platform", "work", "work-platform"],
+  ["Films", "work", "work-films"], ["In progress", "work", "work-progress"]
  ]},
  {label:"Thinking", section:"thinking", items:[["Board", "board"], ["Signals", "signals"]]}
 ];
