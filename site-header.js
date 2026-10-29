@@ -6,7 +6,7 @@ const HEADER_MENUS = [
  ]},
  {label:"Work", section:"work", items:[
   ["Overview", "work"], ["Sachin & Adam", "work", "work-episodes"], ["Films", "work", "work-films"],
-  ["Kindling platform", "work", "work-platform"], ["In progress", "work", "work-progress"], ["Ideas", "work", "work-ideas"]
+  ["Kindling platform", "work", "work-platform"], ["In progress", "work", "work-progress"], ["Etched & the opportunity", "work", "work-ideas"]
  ]},
  {label:"Thinking", section:"thinking", items:[["Board", "board"], ["Signals", "signals"]]}
 ];
