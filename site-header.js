@@ -1,21 +1,21 @@
 // Shared compact menu bar for the portfolio and article.
-const WORK_ANCHORS = ["work-episodes", "work-films", "work-platform", "work-progress", "work-ideas"];
+const WORK_ANCHORS = ["work-episodes", "work-films", "work-platform", "work-progress"];
 const HEADER_MENUS = [
  {label:"◰ Calv", section:"about", items:[
   ["Introduction", "about"], ["Timeline", "timeline"], ["Cosigned", "cos"], ["Beyond work", "beyond"]
  ]},
  {label:"Work", section:"work", items:[
   ["Overview", "work"], ["Sachin & Adam", "work", "work-episodes"], ["Films", "work", "work-films"],
-  ["Kindling platform", "work", "work-platform"], ["In progress", "work", "work-progress"], ["Etched & the opportunity", "work", "work-ideas"]
+  ["Kindling platform", "work", "work-platform"], ["In progress", "work", "work-progress"]
  ]},
  {label:"Thinking", section:"thinking", items:[["Board", "board"], ["Signals", "signals"]]}
 ];
-const articlePage = location.pathname.endsWith("article.html");
+const articlePage = /\.html$/.test(location.pathname) && !location.pathname.endsWith("index.html");
 document.querySelector('.site-header').innerHTML = HEADER_MENUS.map(menu => `<details class="nav-menu" data-section="${menu.section}">
  <summary>${menu.label}</summary><nav class="dropdown" aria-label="${menu.label.replace('◰ ', '')}">
  ${menu.items.map(([label, view, anchor]) => `<a href="${articlePage ? './' : ''}?v=${view}${anchor ? '#' + anchor : articlePage ? '#open' : ''}" data-go="${view}"${anchor ? ` data-anchor="${anchor}"` : ''}>${label}</a>`).join('')}
  ${menu.section === 'about' ? `<hr><a href="mailto:matt@kindlingtech.co">Email ↗</a><a href="https://x.com/0xcalv" target="_blank" rel="noopener">X · @0xcalv ↗</a><a href="https://www.linkedin.com/in/matthewcalvetti/" target="_blank" rel="noopener">LinkedIn ↗</a>` : ''}
- </nav></details>`).join('');
+ </nav></details>`).join('') + `<a class="nav-right${location.pathname.endsWith('opportunity.html') ? ' current' : ''}" href="opportunity.html">Opportunity</a>`;
 const headerMenus = [...document.querySelectorAll('.nav-menu')];
 document.addEventListener('click', event => {
  headerMenus.forEach(menu => {
