@@ -1,6 +1,6 @@
 // Route ownership and legacy destinations. Shared dropdown contents live in site-header.js.
 const SECTIONS = {
- work: {label: "Work", description: "Projects, films and the work behind them.", views: ["work"]},
+ work: {label: "Work", description: "", views: ["work"]},
  thinking: {label: "Thinking", description: "The ideas I follow, the signals I collect, and how they connect to my work.", views: ["board", "signals"]},
  about: {label: "Calv", description: "A little about me, my path, and what I spend time on.", views: ["about", "timeline", "cos", "beyond"]}
 };
@@ -43,6 +43,7 @@ function go(view, {historyMode = "push", moveFocus = true, anchor = ""} = {}) {
  });
  document.getElementById("page-title").textContent = section.label;
  document.getElementById("page-description").textContent = section.description;
+ document.getElementById("page-description").hidden = !section.description;
  document.title = `${section.label}${section.views.length > 1 ? " · " + route.label : ""} · Matt Calvetti`;
  const changed = currentView !== view;
  currentView = view;
