@@ -1,5 +1,5 @@
 const $=s=>document.querySelector(s);
-const SIGB=SIGNALS.map((s,i)=>({id:"sig"+i,sec:"Signal",title:s.title,body:s.why,why:"Read through the "+s.lens.toLowerCase()+" lens.",lens:s.lens,src:s.src,when:s.d,url:s.u,urlLab:"View the original ↗"}));
+const SIGB=SIGNALS.map((s,i)=>({id:s.id||"sig"+i,imgs:s.img?[s.img]:undefined,sec:"Signal",title:s.title,body:s.why,why:"Read through the "+s.lens.toLowerCase()+" lens.",lens:s.lens,src:s.src,when:s.d,url:s.u,urlLab:"View the original ↗"}));
 // boot
 const lines=["Kernel: specialised, not general.","Loading board… "+BLOCKS.length+" blocks","Allocating threads… ok","Inference path: one opinion","Ready_"];
 const bl=$("#bootlog"),RM=matchMedia("(prefers-reduced-motion: reduce)").matches;

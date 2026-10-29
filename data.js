@@ -101,7 +101,7 @@ const SIGNALS=[
 {d:"3 Sep 2026",src:"Runway · X",u:"https://x.com/runwayml/status/2092970864916693498",lens:"AI tooling",title:"Runway flexes on purpose",why:"Storyboarded to show off what AI video can do while staying aware that people are tired of AI video."},
 {d:"3 Sep 2026",src:"@alexabraham · X",u:"https://x.com/alexabraham/status/2094800998338531692",lens:"Product storytelling",title:"A clean feature demo",why:"Elegant product demo that shows and never tells."},
 {d:"3 Sep 2026",src:"@IterIntellectus · X",u:"https://x.com/IterIntellectus/status/2094761595217850387",lens:"Timing",title:"Newsjacking a launch",why:"A demo and one static image dropped into a trending conversation as live commentary."},
-{d:"13 Oct 2026",src:"Notion · LinkedIn",u:"https://lnkd.in/p/gSFi2wSb",lens:"Episodic series",title:"Notion APAC's First Block",why:"An episodic series from Notion APAC, and I wanted to know how they approached set dressing and production."},
+{id:"figma-source",d:"25 Aug 2026",src:"Figma · X",u:"https://x.com/figma/status/2091956795086340563",lens:"Episodic series",title:"Figma's Source Material",why:"Figma's weekly series where designers and creatives share the references that shaped them. Adam called it one of the best tech shows he's seen, with clean production, big guests and an innovative format.",img:"img/sig-figma-source.jpg?v=1"},
 {d:"11 Sep 2026",src:"LinkedIn",u:"https://lnkd.in/p/g9tBqXmJ",lens:"Algorithm",title:"LinkedIn's algorithm changes",why:"Seven points worth knowing for anyone posting for founders."},
 {d:"8 Oct 2026",src:"Observation",lens:"Algorithm",title:"Collab posts are getting buried",why:"It feels like the algorithm is quietly suppressing collab posts right now."}
 ];
