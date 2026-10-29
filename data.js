@@ -149,13 +149,11 @@ const VIDEOS=[
 ];
 // v27 raises, verified 25 Oct 2026: HEO US$25M Series B, 21 Sep 2026 (heospace.com press release; SpaceNews, Axios). Everlab A$65M Series A, 17 Jun 2026 (everlab.com.au press release; Forbes Australia, SmartCompany).
 const INPROG=[
-{raise:"US$500M deep tech fund · Boston",t:"A retainer-style partner for Pillar VC",k:"Pitching now",d:"Brilliant academic founders with zero marketing instinct are getting outpaced online by less impressive later-stage companies. My proposal: a retainer-style partner on standby, parachuted into each portfolio company as it comes out of stealth. First up is Tycho (<a href=\"https://tycho.ai\" target=\"_blank\" rel=\"noopener\">tycho.ai</a>), pitch ongoing."},
-{t:"CyQuantum",k:"In progress",d:""},
-{t:"ElevenLabs",k:"In progress",d:""},
+{logo:"img/pillar-logo.svg",alt:"Pillar VC",raise:"US$500M deep tech fund · Boston",t:"A retainer-style partner for Pillar VC",k:"Pitching now",d:"Brilliant academic founders with zero marketing instinct are getting outpaced online by less impressive later-stage companies. My proposal: a retainer-style partner on standby, parachuted into each portfolio company as it comes out of stealth. First up is Tycho (<a href=\"https://tycho.ai\" target=\"_blank\" rel=\"noopener\">tycho.ai</a>), pitch ongoing."},
+{logo:"img/psiquantum-logo.png",t:"PsiQuantum",k:"In progress",d:""},
+{logo:"img/elevenlabs-logo.svg",t:"ElevenLabs",k:"In progress",d:""},
 {logo:"img/heo-logo.png",raise:"Series B · US$25M raised",rsrc:"https://www.heospace.com/resources/stories/heo-raises-us-25-million-to-expand-the-worlds-largest-commercial-non-earth-imaging-network-into-geo",t:"An ownable episodic series with HEO",k:"In development",d:"A recurring series for HEO that it can own. This is the moodboard we are ideating from.",img:"img/heo-ideation.jpg?v=13",cap:"Moodboard · ideation in progress"},
-{logo:"img/everlab-logo.svg",raise:"Series A · A$65M raised",rsrc:"https://www.everlab.com.au/press/everlab-raises-au-65m-series-a-to-make-world-class-preventative-healthcare-something-everyone-can-access",t:"An episodic series with Everlab",k:"In development",d:"An ongoing series I'm pitching creative for, working with Eugene on the genomic testing side."},
-{t:"Hillstart",k:"In progress",d:""},
-{t:"General Compute",k:"In progress",d:""}];
+{logo:"img/everlab-logo.svg",raise:"Series A · A$65M raised",rsrc:"https://www.everlab.com.au/press/everlab-raises-au-65m-series-a-to-make-world-class-preventative-healthcare-something-everyone-can-access",t:"An episodic series with Everlab",k:"In development",d:"An ongoing series I'm pitching creative for, working with Eugene on the genomic testing side."}];
 // Worked on view is canonical: same items and order as the Board's right column (videos have their own row above).
 const WORK=BLOCKS.filter(b=>b.sec==="Things I've worked on"&&b.id!=="videos").map(b=>b.id);
 // v12: lens -> Interested-in card it belongs to (only where one exists)
