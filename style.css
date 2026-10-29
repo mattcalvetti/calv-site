@@ -266,3 +266,5 @@ a{color:#000}
 @media (min-width:1100px){#gProg .prog h3{min-height:3.75em}}
 #gProg .prog .wb{padding:10px 12px 14px}
 #gProg .prog .wb>.small{padding:0;margin:0}
+.vfull{white-space:normal;margin:4px 0}
+#gProg .prog .lpanel img{height:30px!important;max-height:30px!important;max-width:72%!important;width:auto!important}
