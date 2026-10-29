@@ -10,12 +10,13 @@ const HEADER_MENUS = [
  ]},
  {label:"Thinking", section:"thinking", items:[["Board", "board"], ["Signals", "signals"]]}
 ];
+const SITE_ROOT = new URL("./", document.currentScript ? document.currentScript.src : location.href).pathname;
 const articlePage = /\.html$/.test(location.pathname) && !location.pathname.endsWith("index.html");
 document.querySelector('.site-header').innerHTML = HEADER_MENUS.map(menu => `<details class="nav-menu" data-section="${menu.section}">
  <summary>${menu.label}</summary><nav class="dropdown" aria-label="${menu.label.replace('◰ ', '')}">
- ${menu.items.map(([label, view, anchor]) => `<a href="${articlePage ? './' : ''}?v=${view}${anchor ? '#' + anchor : articlePage ? '#open' : ''}" data-go="${view}"${anchor ? ` data-anchor="${anchor}"` : ''}>${label}</a>`).join('')}
+ ${menu.items.map(([label, view, anchor]) => `<a href="${SITE_ROOT}?v=${view}${anchor ? '#' + anchor : articlePage ? '#open' : ''}" data-go="${view}"${anchor ? ` data-anchor="${anchor}"` : ''}>${label}</a>`).join('')}
  ${menu.section === 'about' ? `<hr><a href="mailto:matt@kindlingtech.co">Email ↗</a><a href="https://x.com/0xcalv" target="_blank" rel="noopener">X · @0xcalv ↗</a><a href="https://www.linkedin.com/in/matthewcalvetti/" target="_blank" rel="noopener">LinkedIn ↗</a>` : ''}
- </nav></details>`).join('') + `<a class="nav-right${/\/opportunity\/(index\.html)?$/.test(location.pathname) ? ' current' : ''}" href="opportunity/">Opportunity</a>`;
+ </nav></details>`).join('') + `<a class="nav-right${/\/opportunity\/(index\.html)?$/.test(location.pathname) ? ' current' : ''}" href="${SITE_ROOT}opportunity/">Opportunity</a>`;
 const headerMenus = [...document.querySelectorAll('.nav-menu')];
 document.addEventListener('click', event => {
  headerMenus.forEach(menu => {
