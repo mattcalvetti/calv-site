@@ -50,9 +50,7 @@ function go(view, {historyMode = "push", moveFocus = true, anchor = ""} = {}) {
  currentView = view;
  if(view === "work")activeWorkAnchor = WORK_ANCHORS.includes(anchor) ? anchor : "";
  if(historyMode !== "none") {
-  const url = new URL(location.href);
-  url.searchParams.set("v", view);
-  ["card", "about", "menu"].forEach(key => url.searchParams.delete(key));
+  const url = new URL(viewPath(view), location.origin);
   url.hash = anchor;
   if(url.href !== location.href)history[historyMode === "replace" ? "replaceState" : "pushState"]({}, "", url);
  }
@@ -63,10 +61,28 @@ function go(view, {historyMode = "push", moveFocus = true, anchor = ""} = {}) {
  }
  if(view === "work" && WORK_ANCHORS.includes(anchor))requestAnimationFrame(() => document.getElementById(anchor)?.scrollIntoView({block:"start"}));
 }
+// Clean paths: /calv-site/work/, /calv-site/signals/?card=id. Legacy ?v= links are rewritten in place.
+const ROOT_PATH = typeof SITE_ROOT === "string" ? SITE_ROOT : "/calv-site/";
+function viewPath(view) {return ROOT_PATH + view + "/"}
+function pathView() {
+ const seg = location.pathname.startsWith(ROOT_PATH) ? location.pathname.slice(ROOT_PATH.length).split("/")[0] : "";
+ return seg && seg !== "index.html" ? seg : null;
+}
 function restoreLocation() {
  const query = new URLSearchParams(location.search);
- go(query.has("about") ? "about" : query.get("v"), {historyMode: "none", anchor: location.hash.slice(1)});
- if(query.get("card"))query.get("card").split(",").forEach((id, index) => open(T(id), index > 0));
+ const asked = query.has("about") ? "about" : (query.get("v") || pathView());
+ const anchor = location.hash.startsWith("#open") ? "" : location.hash.slice(1);
+ go(asked, {historyMode: "none", anchor});
+ const card = query.get("card");
+ if(card)card.split(",").forEach((id, index) => open(T(id), index > 0));
+ if(asked) {
+  const clean = new URL(viewPath(currentView), location.origin);
+  if(card)clean.search = "?card=" + card;
+  clean.hash = anchor;
+  if(clean.href !== location.href)history.replaceState(history.state, "", clean);
+ } else if(location.search) {
+  history.replaceState(history.state, "", ROOT_PATH + location.hash);
+ }
 }
 window.addEventListener("popstate", () => {if(unlocked)restoreLocation()});
 
@@ -86,8 +102,7 @@ function syncWorkPosition() {
   if((link.dataset.anchor || "") === anchor)link.setAttribute('aria-current', 'location');
   else link.removeAttribute('aria-current');
  });
- const url = new URL(location.href);
- url.searchParams.set('v', 'work');
+ const url = new URL(viewPath('work'), location.origin);
  url.hash = anchor;
  history.replaceState(history.state, '', url);
 }
