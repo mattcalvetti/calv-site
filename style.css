@@ -249,3 +249,7 @@ a{color:#000}
 .prog .plogo{width:auto;max-width:118px;height:22px;margin:0 auto;padding:9px 0;border-bottom:0}
 .prog .phead{border-bottom:1px solid #000;padding-bottom:8px}
 .prog .phead>span:first-child{height:22px;padding:9px 0;border-bottom:0}
+
+.site-header .nav-right{margin-left:auto;color:var(--ink);text-decoration:none;padding:1px 6px;border-radius:4px}.site-header .nav-right:hover,.site-header .nav-right.current{background:#000;color:#fff}
+.prog .lpanel{display:flex;align-items:center;justify-content:center;aspect-ratio:16/9;border:1px solid #000;padding:12%}.prog .lpanel img{max-width:70%;max-height:34px;width:auto;height:auto;object-fit:contain;filter:brightness(0)!important}.prog .lpanel img.inv{filter:brightness(0) invert(1)!important}
+.prog .phead:has(>span:first-child:empty)>span:first-child{display:none}
