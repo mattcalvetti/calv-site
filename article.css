@@ -1,8 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Silkscreen&display=swap');
 @font-face{font-family:Chicago;src:local("Chicago")}
 *{box-sizing:border-box}body{margin:0;background:#fff;color:#0f1419;font:18px/1.65 -apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
-.top{position:sticky;top:0;display:flex;justify-content:space-between;padding:10px 18px;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #eff3f4;font-size:14px;z-index:2}
-.top a,footer a{color:#0f1419;font-weight:600;text-decoration:none}.top span{color:#536471}
-article{max-width:640px;margin:0 auto;padding:36px 20px 80px}
+.article-context{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem;max-width:var(--page-width);margin:var(--space-lg) auto 0;padding-inline:var(--gutter);font-size:14px}.site-header a,.article-context a{color:var(--ink)}
+article{max-width:640px;margin:0 auto;padding:var(--space-section) 20px var(--page-end-space)}
 h1{font-size:40px;line-height:1.15;letter-spacing:-.02em;margin:8px 0 20px;font-weight:800}
 .by{display:flex;gap:12px;align-items:center;padding-bottom:22px;margin-bottom:28px;border-bottom:1px solid #eff3f4}
 .by img{border-radius:50%}.by b{display:block;font-size:16px}.by span{color:#536471;font-size:15px}
