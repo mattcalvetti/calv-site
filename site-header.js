@@ -15,7 +15,7 @@ document.querySelector('.site-header').innerHTML = HEADER_MENUS.map(menu => `<de
  <summary>${menu.label}</summary><nav class="dropdown" aria-label="${menu.label.replace('◰ ', '')}">
  ${menu.items.map(([label, view, anchor]) => `<a href="${articlePage ? './' : ''}?v=${view}${anchor ? '#' + anchor : articlePage ? '#open' : ''}" data-go="${view}"${anchor ? ` data-anchor="${anchor}"` : ''}>${label}</a>`).join('')}
  ${menu.section === 'about' ? `<hr><a href="mailto:matt@kindlingtech.co">Email ↗</a><a href="https://x.com/0xcalv" target="_blank" rel="noopener">X · @0xcalv ↗</a><a href="https://www.linkedin.com/in/matthewcalvetti/" target="_blank" rel="noopener">LinkedIn ↗</a>` : ''}
- </nav></details>`).join('') + `<a class="nav-right${location.pathname.endsWith('opportunity.html') ? ' current' : ''}" href="opportunity.html">Opportunity</a>`;
+ </nav></details>`).join('') + `<a class="nav-right${/\/opportunity\/(index\.html)?$/.test(location.pathname) ? ' current' : ''}" href="opportunity/">Opportunity</a>`;
 const headerMenus = [...document.querySelectorAll('.nav-menu')];
 document.addEventListener('click', event => {
  headerMenus.forEach(menu => {
