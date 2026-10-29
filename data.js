@@ -28,7 +28,7 @@ const BLOCKS=[
 {id:"article",sec:"Things I've worked on",title:"Trust’s Biggest Accelerant (draft article)",body:"My essay on co-signs, from Jaz-O putting on a young Jay-Z to a16z's Cosign and X Money.",why:"I am writing up how I think cosigns work.",when:"2026",url:"article.html",urlLab:"Read the article ▸",links:["dylanx"]},
 {id:"distil",sec:"Things I've worked on",title:"Distillation into learnings",body:"The distiller turns a company's raw context into learnings. I defined the buckets those learnings get sorted into, the parts of context we think an idea is formed from. That is how the system decides what an idea can draw on.",why:"It is the same habit as scouting, used on information.",when:"Kindling",links:["harness"]},
 {id:"fds",sec:"Things I've worked on",title:"FDS at Kindling",body:"Founding team at Kindling and head of FDS, leading a team of soon to be six strategists. FDS runs organic content for B2B tech founders.",why:"It is where taste has to become something a team can repeat.",when:"Since joining Kindling",links:["harness","distil","videos"]},
-{id:"platform",sec:"Things I've worked on",title:"The Kindling platform",body:"Kindling's marketing brain and execution system, launching soon at kindling.team. Over the last year I helped build the product with our co-founders and a team of founding engineers. I put together the skills and the master prompt, defined the buckets that context gets sorted into to form ideas, and checked in LangSmith traces that the skills ran in the right order. I started as a strategist and moved into steering product.",why:"It takes what a good strategist does and makes it repeatable for every customer.",when:"2025–2026",url:"https://kindling.team/product",urlLab:"Visit kindling.team ↗",links:["harness","distil","agentsw","fds","videos"]},
+{id:"platform",sec:"Things I've worked on",title:"The Kindling platform",body:"Marketing superpowers for ambitious B2B companies, launched 29 Oct 2026 at kindling.team. It brings together the world's best creatives, strategists and AI agents. Sachin, Adam and I built it over the last year. I started as a strategist and moved into steering product.",why:"It takes what a good strategist does and makes it repeatable for every customer.",when:"2025–2026",url:"https://kindling.team/product",urlLab:"Visit kindling.team ↗",links:["harness","distil","agentsw","fds","videos"]},
 {id:"videos",sec:"Things I've worked on",title:"Customer videos",body:"Videos I've run for Kindling customers through the Kindling marketplace, including HEO's first rendezvous mission, Haast's Series A and flagship agents, building in public with Meridian and Eugene in LA.",url:"?v=work",urlLab:"Open the Worked on view ▸",why:"The work people actually see.",when:"Kindling",links:["sachadam"]},
 {id:"saep",sec:"Things I've worked on",title:"Sachin & Adam episodes",body:"Episodes from our media arm on PsiQuantum, Fortell, Physical Intelligence, Baseten, Chai Discovery and Base Power. I was an internal sounding board alongside Tom, giving feedback on drafts.",why:"Watching how a long form story about a frontier company gets made.",when:"2026",url:"?v=work",urlLab:"See them in Worked on ▸",links:["lps","dylan","brent","sachadam"]},
 {id:"senescence",sec:"Things I've worked on",title:"Senescence",body:"An early short film of mine, named for the Latin word for the slow decline that comes with age.",why:"I was telling stories with a camera well before it was my job.",when:"",ph:1,pend:"Video link pending",links:["email"]},
@@ -149,8 +149,13 @@ const VIDEOS=[
 ];
 // v27 raises, verified 25 Oct 2026: HEO US$25M Series B, 21 Sep 2026 (heospace.com press release; SpaceNews, Axios). Everlab A$65M Series A, 17 Jun 2026 (everlab.com.au press release; Forbes Australia, SmartCompany).
 const INPROG=[
+{raise:"US$500M deep tech fund · Boston",t:"A retainer-style partner for Pillar VC",k:"Pitching now",d:"Brilliant academic founders with zero marketing instinct are getting outpaced online by less impressive later-stage companies. My proposal: a retainer-style partner on standby, parachuted into each portfolio company as it comes out of stealth. First up is Tycho (<a href=\"https://tycho.ai\" target=\"_blank\" rel=\"noopener\">tycho.ai</a>), pitch ongoing."},
+{t:"CyQuantum",k:"In progress",d:""},
+{t:"ElevenLabs",k:"In progress",d:""},
 {logo:"img/heo-logo.png",raise:"Series B · US$25M raised",rsrc:"https://www.heospace.com/resources/stories/heo-raises-us-25-million-to-expand-the-worlds-largest-commercial-non-earth-imaging-network-into-geo",t:"An ownable episodic series with HEO",k:"In development",d:"A recurring series for HEO that it can own. This is the moodboard we are ideating from.",img:"img/heo-ideation.jpg?v=13",cap:"Moodboard · ideation in progress"},
-{logo:"img/everlab-logo.svg",raise:"Series A · A$65M raised",rsrc:"https://www.everlab.com.au/press/everlab-raises-au-65m-series-a-to-make-world-class-preventative-healthcare-something-everyone-can-access",t:"An episodic series with Everlab",k:"In development",d:"An ongoing series I'm pitching creative for, working with Eugene on the genomic testing side."}];
+{logo:"img/everlab-logo.svg",raise:"Series A · A$65M raised",rsrc:"https://www.everlab.com.au/press/everlab-raises-au-65m-series-a-to-make-world-class-preventative-healthcare-something-everyone-can-access",t:"An episodic series with Everlab",k:"In development",d:"An ongoing series I'm pitching creative for, working with Eugene on the genomic testing side."},
+{t:"Hillstart",k:"In progress",d:""},
+{t:"General Compute",k:"In progress",d:""}];
 // Worked on view is canonical: same items and order as the Board's right column (videos have their own row above).
 const WORK=BLOCKS.filter(b=>b.sec==="Things I've worked on"&&b.id!=="videos").map(b=>b.id);
 // v12: lens -> Interested-in card it belongs to (only where one exists)
@@ -158,13 +163,11 @@ const LENS_CARD={"Talent scouting":"scout","New media":"brent"};
 
 // v22: Worked on spotlight for the Kindling platform. Only claims the public site or existing cards support.
 const PLATFORM={img:"img/kindling-product.jpg?v=22",u:"https://kindling.team/product",
- line:"Kindling is the marketing brain and execution system we're launching soon. Over the last year I helped build the product with our co-founders and a team of founding engineers. I put together the skills and the master prompt, defined the buckets that context gets sorted into to form ideas, and checked in LangSmith traces that the skills ran in the right order.",
+ line:"Kindling launched today: marketing superpowers for ambitious B2B companies. Building a great product has never been easier; getting customers to care has never been harder. Kindling brings together the world's best creatives, strategists and AI agents to close that gap. Sachin, Adam and I built it over the last year.",
  flow:[
- ["Context","What Kindling knows about the company and its founders, distilled into learnings."],
- ["Learnings","Sorted into the buckets I defined, the parts of context an idea is formed from."],
- ["Idea generation","Skills draw on those learnings to propose ideas."],
- ["Human evals","People review the ideas, and their feedback is meant to improve idea generation over time."],
- ["Briefs","Approved ideas become automated briefs for videographers and editors."],
+ ["Context","What Kindling knows about the company and its founders."],
+ ["Ideas","Creative ideas built from that context, reviewed by people."],
+ ["Briefs","Approved ideas become briefs for videographers and editors."],
  ["Copy","Copy written in each founder's tone of voice."],
  ["Distribution","The finished work goes out on each channel."]]};
 
