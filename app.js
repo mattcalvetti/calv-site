@@ -30,7 +30,7 @@ const card=b=>{const el=document.createElement("div");el.className="win blk";el.
 function render(){const L=$("#colL"),R=$("#colR");
  BLOCKS.forEach(b=>{if(b.sec==="Things I'm interested in")L.append(card(b));else if(b.sec==="Things I've worked on")R.append(card(b));
 });
- const vt=v=>`<div class="win wt vtile${v.spot?' spot':''}"><div class="tb"><span>${v.c}</span></div><div class="wb">${vplayer(v)}<div class="vt"><h3>${v.t}</h3><div class="vmeta">${v.c} · ${v.date}</div><div class="small v1">${v.d}</div>${(v.x||v.m||v.u)?`<details class="vmore"><summary>more</summary>${v.x?`<p class="small">${v.x}</p>`:''}<p class="small muted">${v.m?v.m+' on LinkedIn. ':''}${v.u?`<a href="${v.u}" target="_blank" rel="noopener">View on LinkedIn ↗</a>`:''}</p></details>`:''}<a href="#" class="small onb" data-board="videos">On the Board ▸</a></div></div></div>`;
+ const vt=v=>`<div class="win wt vtile${v.spot?' spot':''}"><div class="tb"><span>${v.c}</span></div><div class="wb">${vplayer(v)}<div class="vt"><h3>${v.t}</h3><div class="vmeta">${v.c} · ${v.date}</div><div class="small v1" title="${v.d.replace(/"/g,"&quot;")}">${v.d}</div>${true?`<details class="vmore"><summary>more</summary><p class="small">${v.d}</p>${v.x?`<p class="small">${v.x}</p>`:''}<p class="small muted">${v.m?v.m+' on LinkedIn. ':''}${v.u?`<a href="${v.u}" target="_blank" rel="noopener">View on LinkedIn ↗</a>`:''}</p></details>`:''}<a href="#" class="small onb" data-vid="${VIDEOS.indexOf(v)}">On the Board ▸</a></div></div></div>`;
  $("#gHeo").innerHTML=DZ+`<div class="spotw">${VIDEOS.filter(v=>v.spot).map(vt).join("")}</div>`;
  $("#gVid").innerHTML=`<div class="wgrid">${VIDEOS.filter(v=>!v.spot).map(vt).join("")}</div>`;
  $("#gSA").innerHTML=SA.map(s=>`<div class="win wt vtile satile"><div class="tb"><span>${s.c}</span></div><div class="wb"><div class="frame yt" data-yt="${s.yt}" role="button" tabindex="0" aria-label="Play ${s.t}"><img class="poster" src="https://i.ytimg.com/vi/${s.yt}/hqdefault.jpg" alt="" loading="lazy"><span class="play" aria-hidden="true"><svg viewBox="0 0 40 40" width="44" height="44"><rect x="1" y="1" width="38" height="38" rx="6" fill="#fff" stroke="#000" stroke-width="2"/><polygon points="15,11 15,29 29,20" fill="#000"/></svg></span></div><div class="vt"><h3>${s.c}</h3><div class="vmeta">${s.date} · ${s.v} views on YouTube${s.xv?` · ${s.xv} on <a href="${s.x}" target="_blank" rel="noopener">X</a>`:''}</div><div class="small v1">${s.t}</div></div></div></div>`).join("");
@@ -66,6 +66,7 @@ function content(b){const r=READS[b.id];
 
  ${b.art?`<p><a class="artl" href="article.html">Read my article, Trust’s Biggest Accelerant ▸</a></p>`:''}${b.url?`<p><a href="${b.url}" ${b.url.startsWith("?")||!/^http/.test(b.url)?'':'target="_blank" rel="noopener"'}>${b.urlLab||"Open original ↗"}</a></p>`:''}
  ${strip?`<div class="conn"><div class="rl">Connected to · explore another card</div><div class="strip">${strip}</div></div>`:''}
+ ${b.id==="videos"?`<div class="vlist"><div class="rl">Every video</div>${VIDEOS.map((v,i)=>`<div class="ventry" id="vid-${i}"><b>${v.t}</b><span class="small muted"> · ${v.c} · ${v.date}</span><p class="small">${v.d}</p>${v.u?`<a class="small" href="${v.u}" target="_blank" rel="noopener">View on LinkedIn ↗</a>`:""}</div>`).join("")}</div>`:""}
  ${b.when?`<p class="small muted">When: ${b.when}</p>`:""}`}
 function open(b,hop){if(!b)return;
  if(!hop)STACK=[b.id];else{const k=STACK.indexOf(b.id);if(k>=0)STACK=STACK.slice(0,k+1);else STACK.push(b.id);if(STACK.length>MAXW)STACK=STACK.slice(-MAXW)}
@@ -115,7 +116,8 @@ function showOnBoard(ids){ids=[].concat(ids);STACK=[];renderStack();go("board");
  setTimeout(()=>{const el=$("#b-"+ids[0]);if(!el)return;draw();el.scrollIntoView({behavior:RM?"instant":"smooth",block:"center"});
   ids.forEach(id=>{const c=$("#b-"+id);if(c)c.classList.add("pulse")});focus(ids[0],1);
   setTimeout(()=>{ids.forEach(id=>{const c=$("#b-"+id);if(c)c.classList.remove("pulse")});focus(ids[0],0)},2600)},60)}
-document.addEventListener("click",e=>{const l=e.target.closest("[data-board]");if(l){e.preventDefault();e.stopPropagation();showOnBoard(l.dataset.board.split(","))}},true);
+document.addEventListener("click",e=>{const vl=e.target.closest("[data-vid]");if(vl){e.preventDefault();e.stopPropagation();const i=vl.dataset.vid;showOnBoard(["videos"]);setTimeout(()=>{open(T("videos"));const el=document.getElementById("vid-"+i);if(el){el.classList.add("pulse");el.scrollIntoView({block:"center"})}},200);return}
+ const l=e.target.closest("[data-board]");if(l){e.preventDefault();e.stopPropagation();showOnBoard(l.dataset.board.split(","))}},true);
 
 function playYT(fr){const f=document.createElement("iframe");f.src="https://www.youtube-nocookie.com/embed/"+fr.dataset.yt+"?autoplay=1&rel=0";f.allow="autoplay; encrypted-media; picture-in-picture; fullscreen";f.allowFullscreen=true;f.title="YouTube video";fr.innerHTML="";fr.classList.add("playing");fr.append(f)}
 document.addEventListener("click",e=>{const fr=e.target.closest(".frame.yt:not(.playing)");if(fr)playYT(fr)});
