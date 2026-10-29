@@ -255,3 +255,14 @@ a{color:#000}
 .prog .phead:has(>span:first-child:empty)>span:first-child{display:none}
 .vlist{margin:14px 0}.ventry{border:1px solid #000;border-radius:6px;padding:8px 10px;margin:8px 0}.ventry p{margin:4px 0}.ventry.pulse{outline:3px solid #000;outline-offset:2px}
 @media (min-width:1100px){#gProg.wgrid{grid-template-columns:repeat(6,minmax(0,1fr));gap:14px}}
+/* v49: uniform pitch cards */
+#gProg.wgrid{align-items:stretch}
+#gProg .prog{height:100%}
+#gProg .prog .wb{display:flex;flex-direction:column;flex:1}
+#gProg .prog .phead{min-height:46px;height:46px;flex-direction:row;align-items:center;justify-content:flex-start;margin:0 0 10px;padding:0 0 8px;overflow:hidden}
+#gProg .prog .phead>span:first-child{display:none}
+#gProg .prog .lpanel{aspect-ratio:16/9;width:100%;margin:0 0 10px;padding:0}
+#gProg .prog h3{margin:0 0 6px;line-height:1.25}
+@media (min-width:1100px){#gProg .prog h3{min-height:3.75em}}
+#gProg .prog .wb{padding:10px 12px 14px}
+#gProg .prog .wb>.small{padding:0;margin:0}
