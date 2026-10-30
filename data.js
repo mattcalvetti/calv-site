@@ -48,7 +48,7 @@ const BLOCKS=[
 {id:"degods",ev:[["GTM and content, DeGods visual thread on X ↗","https://x.com/0xCalv/status/1687724917150883840"]],sec:"Path",title:"DeGods content contributor",body:"I was a content contributor to DeGods, and in Dec 2023 I wrote on X, “Last 6 months been wild… From not having a Canva account to now contributing alongside [the DeGods design team].”",why:"Frank cared more about the vibe than about design skills.",when:"c. Jun–Dec 2023",url:"https://x.com/0xCalv/status/1733111650197336336"},
 {id:"voicesite",sec:"Path",title:"This site, built by voice",body:"Pulling what I'm interested in, what I've worked on and who has vouched for me into one place. I talked every part of it through with Grok Bot and wrote none of the code by hand.",why:"An experiment in building by voice.",when:"Oct 2026"},
 {id:"kindling",sec:"Path",title:"Joined Kindling",body:"",why:"Founding team, and head of FDS.",when:""},
-{id:"sachadam",sec:"Who's cosigned me",title:"Sachin & Adam",body:"An existing relationship around their documentary series on emerging tech.",why:"I am a sounding board to them alongside Tom.",when:"2026",ph:1,links:[]}
+{id:"sachadam",sec:"Who's cosigned me",title:"Sachin & Adam",body:"An existing relationship around their documentary series on emerging tech.",why:"I work directly with Tom Duffy guiding the episode's direction & structural clarity.",when:"2026",ph:1,links:[]}
 ];
 // Threads: interest -> work it shaped. Order of both columns keeps these crossing-free.
 const THREADS=[["lps","saep","tech media"],["dylan","saep","new media"],["agentsi","platform","agents in the product"],["special","platform","built for one job"],["agentsi","email","agents in the pitch"],["friction","email","Yala, in the email"],["scout","agency","reading talent"],
@@ -110,7 +110,7 @@ const SIGNALS=[
 const BEYOND=[
 {h:"Personal interests",note:"Things I got into early, or just love doing.",items:[
  {t:"Crypto",a:"a contributor to DeGods in 2023"},
- {t:"New media",a:"a sounding board to Sachin & Adam, and reading a16z and Erik Torenberg on where it's going"},
+ {t:"New media",a:"working directly with Tom Duffy guiding the direction & structural clarity of Sachin & Adam's episodes, and reading a16z and Erik Torenberg on where it's going"},
  {t:"Adventures",a:"Yala Peak (5,600m) in Nepal, 11 days on foot, Apr 2025"},
  {t:"Hyrox"}]},
 {h:"Reading",items:[
@@ -170,7 +170,7 @@ const PLATFORM={img:"img/kindling-home.jpg?v=50",u:"https://kindling.team/produc
  ["Copy","Copy written in each founder's tone of voice."],
  ["Distribution","The finished work goes out on each channel."]]};
 
-// v25: Sachin & Adam episodes. Calv was an internal sounding board alongside Tom, giving feedback on drafts. No production credit.
+// v25: Sachin & Adam episodes. Calv works directly with Tom Duffy on episode direction, giving feedback on drafts. No production credit.
 // YouTube views are the rounded public counts shown on the channel, read 25 Oct 2026. X views are public impression counts, read 25 Oct 2026.
 const SA=[
 {c:"Baseten",yt:"LILsOOG0Z1o",t:"The Smartest Team in AI You've Never Heard Of",date:"Oct 2026",v:"154K",x:"https://x.com/Sachin_and_Adam/status/2105784970090578355",xv:"109K"},
